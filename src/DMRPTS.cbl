@@ -154,7 +154,7 @@
        2200-APPLY-POINTS.
            MOVE OFF-BASE-PTS TO WS-APPLIED-PTS
            MOVE 'NO ' TO WS-DOUBLE-FLAG
-      *    CR 2291 - REPEAT OFFENCE WITHIN 12 MONTHS
+      *    CR 2291 - REPEAT OFFENCE OF SAME CLASS WITHIN 12 MONTHS (BR-05)
            IF OFF-DBL-ELIGIBLE
                PERFORM VARYING WS-PX FROM 1 BY 1
                        UNTIL WS-PX > WS-PRIOR-COUNT
@@ -162,6 +162,7 @@
                        FUNCTION INTEGER-OF-DATE(OFF-DATE)
                      - FUNCTION INTEGER-OF-DATE(WS-PR-DATE(WS-PX))
                    IF WS-GAP-DAYS <= 365
+                      AND WS-PR-CLASS(WS-PX) = OFF-CLASS
                        MOVE 'YES' TO WS-DOUBLE-FLAG
                    END-IF
                END-PERFORM
