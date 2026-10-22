@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-22T02:19:23Z",
+  "generatedAt": "2026-10-22T16:17:40Z",
   "summary": {
     "drivers": 13,
-    "matched": 8,
-    "expectedDifferences": 5,
+    "matched": 10,
+    "expectedDifferences": 3,
     "unexpected": 0,
     "renewals": 10,
     "renewalMatched": 10
@@ -150,17 +150,17 @@
       "name": "ISLA MORGAN",
       "legacy": {
         "licenceClass": "OP",
-        "points": 14,
-        "suspensionNotice": true
+        "points": 10,
+        "suspensionNotice": false
       },
       "modern": {
         "licenceClass": "OP",
         "points": 10,
         "suspensionNotice": false
       },
-      "status": "EXPECTED_DIFFERENCE",
-      "rule": "BR-05",
-      "reason": "MP MP01 on 2026-09-05 was doubled by COBOL because of a SP offence on 2026-01-10. BR-05 only doubles a repeat offence of the same class: legacy 14 points, policy 10; that pushes legacy over the 12-point limit and issues a suspension notice"
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000010",
@@ -218,7 +218,7 @@
       "name": "MAYA ROSSI",
       "legacy": {
         "licenceClass": "OP",
-        "points": 8,
+        "points": 5,
         "suspensionNotice": false
       },
       "modern": {
@@ -226,9 +226,9 @@
         "points": 5,
         "suspensionNotice": false
       },
-      "status": "EXPECTED_DIFFERENCE",
-      "rule": "BR-05",
-      "reason": "SB SB01 on 2026-07-10 was doubled by COBOL because of a MP offence on 2026-02-01. BR-05 only doubles a repeat offence of the same class: legacy 8 points, policy 5"
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
     }
   ],
   "renewals": [

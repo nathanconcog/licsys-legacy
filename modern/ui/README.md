@@ -12,7 +12,7 @@ It is built with React 18, Vite 5, TypeScript, Tailwind CSS and Framer Motion.
 | `/drivers` (default), `/drivers/:id` | **Driver 360** for one driver. It has a licence card with a tenure progress bar, a points gauge against the class limit, an offence timeline, notices and a *Record offence* form. Each decision has a **Why?** popover with the `rule` and `reason` from the API. Search by number or name, or press <kbd>⌘K</kbd>. |
 | `/activity` | **Live activity**. Domain events from the SSE stream at `/notification/api/activity/stream`, colour-coded by bounded context. Each event shows source → `licsys-bus` → queue → consumer, and you can expand its JSON. |
 | `/architecture` | **Architecture**. A context map of API Gateway, the four services (with live `actuator/health` dots and their DynamoDB tables), EventBridge and SQS. Events animate across the map as they arrive. A side panel maps each legacy COBOL program or paragraph to the service that replaces it. |
-| `/parity` | **Parity**. Reads `/parity.json` and shows the headline (13 drivers · 8 identical · 5 policy fixes · 0 unexpected), the five fixes with their explanations, the full driver table and the renewal totals. |
+| `/parity` | **Parity**. Reads `/parity.json` and shows the headline (13 drivers · 10 identical · 3 policy fixes · 0 unexpected), the three fixes with their explanations, the full driver table and the renewal totals. |
 | `/renewals` | **Registration quote**. Posts to `/registration/api/renewals/quote` and shows a line-item breakdown tagged with BR-06 clauses. You can then submit the renewal. |
 
 The top bar has **Reset demo**, which calls `POST /api/admin/reset` on each of the four services.

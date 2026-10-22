@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-21T02:14:09Z",
+  "generatedAt": "2026-10-22T16:17:39Z",
   "summary": {
     "drivers": 13,
-    "matched": 8,
-    "expectedDifferences": 5,
+    "matched": 10,
+    "expectedDifferences": 3,
     "unexpected": 0,
     "renewals": 10,
     "renewalMatched": 10
@@ -11,7 +11,7 @@
   "drivers": [
     {
       "driverId": "D0000001",
-      "name": "Alice Nguyen",
+      "name": "ALICE NGUYEN",
       "legacy": {
         "licenceClass": "P2",
         "points": 0,
@@ -23,12 +23,12 @@
         "suspensionNotice": false
       },
       "status": "MATCH",
-      "rule": "BR-02",
-      "reason": "Held P1 for 414 days (\u2265 365) with 0 points. Both systems progress Alice from P1 to P2 on 2026-10-20."
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000002",
-      "name": "Ben Kowalski",
+      "name": "BEN KOWALSKI",
       "legacy": {
         "licenceClass": "P1",
         "points": 1,
@@ -40,12 +40,12 @@
         "suspensionNotice": false
       },
       "status": "MATCH",
-      "rule": "BR-02",
-      "reason": "233 of the 365 days needed on P1. Both systems leave Ben on P1."
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000003",
-      "name": "Chloe Patel",
+      "name": "CHLOE PATEL",
       "legacy": {
         "licenceClass": "OP",
         "points": 0,
@@ -57,12 +57,12 @@
         "suspensionNotice": false
       },
       "status": "MATCH",
-      "rule": "BR-03",
-      "reason": "810 days on P2 counted from the P2 date (legacy counted 1,193 from P1). Both are over 730, so both progress Chloe to Open."
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000004",
-      "name": "Daniel O'Brien",
+      "name": "DANIEL OBRIEN",
       "legacy": {
         "licenceClass": "OP",
         "points": 1,
@@ -75,11 +75,11 @@
       },
       "status": "EXPECTED_DIFFERENCE",
       "rule": "BR-03",
-      "reason": "P2 was issued on 2025-06-15, so Daniel has 492 of the 730 days he needs. Legacy LICUPG counted from the P1 date (871 days) and upgraded him to Open early."
+      "reason": "COBOL LICUPG counts P2 tenure from the P1 date 2024-06-01 (871 days) and upgraded to OP; BR-03 counts from the P2 issue date 2025-06-15 (492 days < 730), so the driver stays P2"
     },
     {
       "driverId": "D0000005",
-      "name": "Emma Taylor",
+      "name": "EMMA TAYLOR",
       "legacy": {
         "licenceClass": "OP",
         "points": 0,
@@ -92,11 +92,11 @@
       },
       "status": "EXPECTED_DIFFERENCE",
       "rule": "BR-03",
-      "reason": "P2 was issued on 2025-03-10, so Emma has 589 of the 730 days she needs. Legacy counted from the P1 date (963 days) and upgraded her to Open early."
+      "reason": "COBOL LICUPG counts P2 tenure from the P1 date 2024-03-01 (963 days) and upgraded to OP; BR-03 counts from the P2 issue date 2025-03-10 (589 days < 730), so the driver stays P2"
     },
     {
       "driverId": "D0000006",
-      "name": "Farid Hassan",
+      "name": "FARID HASSAN",
       "legacy": {
         "licenceClass": "OP",
         "points": 8,
@@ -108,12 +108,12 @@
         "suspensionNotice": false
       },
       "status": "MATCH",
-      "rule": "BR-04",
-      "reason": "No new offences. 8 points is under the Open limit of 12 in both systems."
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000007",
-      "name": "Grace Liu",
+      "name": "GRACE LIU",
       "legacy": {
         "licenceClass": "OP",
         "points": 2,
@@ -125,12 +125,12 @@
         "suspensionNotice": false
       },
       "status": "MATCH",
-      "rule": "BR-03",
-      "reason": "782 days on P2 (902 days less 120 suspended) and 2 points. Both systems progress Grace to Open."
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000008",
-      "name": "Henry Walker",
+      "name": "HENRY WALKER",
       "legacy": {
         "licenceClass": "P1",
         "points": 5,
@@ -142,29 +142,29 @@
         "suspensionNotice": true
       },
       "status": "MATCH",
-      "rule": "BR-04",
-      "reason": "A first SP offence adds 3 points, taking Henry to 5 against a P1 limit of 4. Both systems issue a suspension notice."
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000009",
-      "name": "Isla Morgan",
+      "name": "ISLA MORGAN",
       "legacy": {
         "licenceClass": "OP",
-        "points": 14,
-        "suspensionNotice": true
+        "points": 10,
+        "suspensionNotice": false
       },
       "modern": {
         "licenceClass": "OP",
         "points": 10,
         "suspensionNotice": false
       },
-      "status": "EXPECTED_DIFFERENCE",
-      "rule": "BR-05",
-      "reason": "The MP offence on 2026-09-05 followed an SP offence, not an MP one. BR-05 only doubles a repeat of the same class, so it costs 4 points and Isla ends on 10, below the limit of 12. Legacy DMRPTS doubled it to 8 points (14 in total) and wrongly issued a suspension notice."
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000010",
-      "name": "Jack Robinson",
+      "name": "JACK ROBINSON",
       "legacy": {
         "licenceClass": "OP",
         "points": 11,
@@ -176,12 +176,12 @@
         "suspensionNotice": false
       },
       "status": "MATCH",
-      "rule": "BR-05",
-      "reason": "A repeat SP offence 257 days after the previous SP. Both systems double it from 4 to 8 points, for 11 in total."
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000011",
-      "name": "Kirra Smith",
+      "name": "KIRRA SMITH",
       "legacy": {
         "licenceClass": "OP",
         "points": 3,
@@ -193,12 +193,12 @@
         "suspensionNotice": false
       },
       "status": "MATCH",
-      "rule": "BR-05",
-      "reason": "The previous SB offence was 516 days earlier, outside the 365-day window. Normal points apply in both systems."
+      "rule": null,
+      "reason": null
     },
     {
       "driverId": "D0000012",
-      "name": "Liam Brown",
+      "name": "LIAM BROWN",
       "legacy": {
         "licenceClass": "OP",
         "points": 3,
@@ -211,14 +211,14 @@
       },
       "status": "EXPECTED_DIFFERENCE",
       "rule": "BR-03",
-      "reason": "P2 was issued on 2025-02-01, so Liam has 626 of the 730 days he needs. Legacy counted from the P1 date (1,009 days) and upgraded him to Open early."
+      "reason": "COBOL LICUPG counts P2 tenure from the P1 date 2024-01-15 (1009 days) and upgraded to OP; BR-03 counts from the P2 issue date 2025-02-01 (626 days < 730), so the driver stays P2"
     },
     {
       "driverId": "D0000013",
-      "name": "Maya Rossi",
+      "name": "MAYA ROSSI",
       "legacy": {
         "licenceClass": "OP",
-        "points": 8,
+        "points": 5,
         "suspensionNotice": false
       },
       "modern": {
@@ -226,9 +226,9 @@
         "points": 5,
         "suspensionNotice": false
       },
-      "status": "EXPECTED_DIFFERENCE",
-      "rule": "BR-05",
-      "reason": "The SB offence on 2026-07-10 followed an MP offence, a different class, so it costs 3 points and Maya ends on 5. Legacy DMRPTS doubled it to 6 points (8 in total)."
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
     }
   ],
   "renewals": [
