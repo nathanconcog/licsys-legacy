@@ -9,6 +9,7 @@
       *   1999-11-18 TLM  Y2K - 8 DIGIT DATES
       *   2004-07-01 PJH  REPEAT OFFENCE DOUBLE DEMERITS (CR 2291)
       *   2013-02-11 ANB  ADDED MOBILE PHONE CLASS MP (CR 4410)
+      *   2026-10-22 DVN  DOUBLE DEMERITS ONLY FOR SAME CLASS (BR-05)
       *****************************************************************
        IDENTIFICATION DIVISION.
        PROGRAM-ID. DMRPTS.
@@ -154,14 +155,16 @@
        2200-APPLY-POINTS.
            MOVE OFF-BASE-PTS TO WS-APPLIED-PTS
            MOVE 'NO ' TO WS-DOUBLE-FLAG
-      *    CR 2291 - REPEAT OFFENCE WITHIN 12 MONTHS
+      *    CR 2291 / BR-05 - REPEAT OFFENCE OF THE SAME CLASS
+      *    WITHIN 12 MONTHS
            IF OFF-DBL-ELIGIBLE
                PERFORM VARYING WS-PX FROM 1 BY 1
                        UNTIL WS-PX > WS-PRIOR-COUNT
                    COMPUTE WS-GAP-DAYS =
                        FUNCTION INTEGER-OF-DATE(OFF-DATE)
                      - FUNCTION INTEGER-OF-DATE(WS-PR-DATE(WS-PX))
-                   IF WS-GAP-DAYS <= 365
+                   IF WS-PR-CLASS(WS-PX) = OFF-CLASS
+                      AND WS-GAP-DAYS <= 365
                        MOVE 'YES' TO WS-DOUBLE-FLAG
                    END-IF
                END-PERFORM
