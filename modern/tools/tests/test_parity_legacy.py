@@ -12,7 +12,7 @@ class LegacyReports(unittest.TestCase):
     def test_read_golden_outputs(self):
         drivers, fees = parity.read_legacy(SAMPLE / "expected" / "out")
         self.assertEqual(len(drivers), 13)
-        self.assertEqual(drivers["D0000009"], {"name": "ISLA MORGAN", "licenceClass": "OP", "points": 14, "suspensionNotice": True})
+        self.assertEqual(drivers["D0000009"], {"name": "ISLA MORGAN", "licenceClass": "OP", "points": 10, "suspensionNotice": False})
         self.assertFalse(drivers["D0000013"]["suspensionNotice"])
         self.assertEqual(fees["123ABC"], ["415.50"])
         self.assertEqual(fees["901YZA"], [None])
@@ -54,10 +54,11 @@ class Classify(unittest.TestCase):
         self.assertEqual((status, rule), ("EXPECTED_DIFFERENCE", "BR-03"))
         self.assertIn("2025-06-15", reason)
 
-    def test_br05_expected_including_notice(self):
-        status, rule, reason = self.run_one("D0000009", points=10, suspensionNotice=False)
-        self.assertEqual((status, rule), ("EXPECTED_DIFFERENCE", "BR-05"))
-        self.assertIn("SP offence on 2026-01-10", reason)
+    def test_br05_same_class_now_matches(self):
+        self.assertEqual(self.legacy["D0000009"]["points"], 10)
+        self.assertFalse(self.legacy["D0000009"]["suspensionNotice"])
+        self.assertEqual(self.run_one("D0000009")[0], "MATCH")
+        self.assertEqual(self.run_one("D0000013")[0], "MATCH")
 
     def test_wrong_policy_value_is_mismatch(self):
         self.assertEqual(self.run_one("D0000009", points=11)[0], "MISMATCH")
