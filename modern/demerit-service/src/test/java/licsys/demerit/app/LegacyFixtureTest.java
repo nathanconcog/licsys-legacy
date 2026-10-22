@@ -26,29 +26,25 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Replays the legacy DMRPTS fixtures in {@code tests/cases/} through the service and compares with the COBOL
  * goldens ({@code expected/out/POSTINGS.rpt}, {@code NOTICES.rpt}, {@code DRVMAST.posted}). The goldens record
- * what the COBOL does, so the only allowed differences are the BR-05 same-class corrections listed per case.
+ * what the COBOL does; any allowed differences are listed per case as corrections.
  */
 class LegacyFixtureTest {
 
     private static final Path CASES = Path.of("..", "..", "tests", "cases");
     private static final DateTimeFormatter YMD = DateTimeFormatter.BASIC_ISO_DATE;
 
-    /** Expected policy result where the COBOL wrongly doubles after a prior offence of a different class. */
+    /** Expected policy result where the COBOL golden differs from the policy. */
     record Correction(int applied, boolean doubled, int total) {
     }
 
     static Stream<Arguments> cases() {
-        Map<String, Correction> c02 = Map.of(
-                "M0000003", new Correction(4, false, 4),   // SP then MP
-                "M0000004", new Correction(3, false, 3));  // GN then SP
-        Map<String, Correction> c01 = Map.of(
-                "D0000009", new Correction(4, false, 10),  // Isla: SP then MP
-                "D0000013", new Correction(3, false, 5));  // Maya: MP then SB
+        // DMRPTS now applies the BR-05 same-class rule, so the goldens need no corrections.
+        Map<String, Correction> none = Map.of();
         return Stream.of(
-                Arguments.of("02-dmrpts-demerits", c02, Set.of(), false),
-                Arguments.of("02-dmrpts-demerits", c02, Set.of(), true),
-                Arguments.of("01-shipped-sample", c01, Set.of("D0000009"), false),
-                Arguments.of("01-shipped-sample", c01, Set.of("D0000009"), true));
+                Arguments.of("02-dmrpts-demerits", none, Set.of(), false),
+                Arguments.of("02-dmrpts-demerits", none, Set.of(), true),
+                Arguments.of("01-shipped-sample", none, Set.of(), false),
+                Arguments.of("01-shipped-sample", none, Set.of(), true));
     }
 
     @ParameterizedTest(name = "{0} (offences before registration: {3})")
