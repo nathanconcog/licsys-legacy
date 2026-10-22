@@ -1,5 +1,6 @@
 package licsys.demerit.web;
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import licsys.demerit.app.ValidationException;
@@ -25,8 +26,19 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, Object>> unreadable(HttpMessageNotReadableException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("rule", Rules.VALIDATION,
-                "reason", "Request body is not valid JSON for an offence {driverId, date, code, offenceClass, "
-                        + "basePoints, alreadyPosted?}"));
+        String field = "body";
+        String reason = "Request body is not valid JSON for an offence {driverId, date, code, offenceClass, "
+                + "basePoints, alreadyPosted?}";
+        if (e.getCause() instanceof MismatchedInputException mie && !mie.getPath().isEmpty()
+                && mie.getPath().get(0).getFieldName() != null) {
+            field = mie.getPath().get(0).getFieldName();
+            reason = field + " has the wrong type (" + mie.getTargetType().getSimpleName().toLowerCase()
+                    + " expected)";
+        }
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("rule", Rules.VALIDATION);
+        body.put("field", field);
+        body.put("reason", reason);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 }

@@ -1,6 +1,7 @@
 package licsys.demerit.web;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -103,7 +104,8 @@ class DemeritControllerTest {
                         .content(offence("D0000099", "2026-09-18", "SP11", "SP", 3, false)))
                 .andExpect(status().isAccepted())
                 .andExpect(jsonPath("$.pendingRegistration").value(true))
-                .andExpect(jsonPath("$.limit").doesNotExist());
+                .andExpect(jsonPath("$.limit").value(nullValue()))
+                .andExpect(jsonPath("$.licenceClass").value(nullValue()));
     }
 
     @Test
@@ -116,11 +118,19 @@ class DemeritControllerTest {
         mvc.perform(post("/api/offences").contentType(MediaType.APPLICATION_JSON)
                         .content("{\"driverId\":\"D0000008\",\"basePoints\":\"lots\"}"))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.rule").value("VALIDATION"));
+                .andExpect(jsonPath("$.rule").value("VALIDATION"))
+                .andExpect(jsonPath("$.field").value("basePoints"))
+                .andExpect(jsonPath("$.reason").value(containsString("basePoints")));
+        mvc.perform(post("/api/offences").contentType(MediaType.APPLICATION_JSON).content("{not json"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.rule").value("VALIDATION"))
+                .andExpect(jsonPath("$.field").value("body"))
+                .andExpect(jsonPath("$.reason").exists());
         mvc.perform(post("/api/offences").contentType(MediaType.APPLICATION_JSON)
                         .content("{\"driverId\":\"D0000008\",\"date\":\"2026-01-01\",\"code\":\"SP11\","
                                 + "\"offenceClass\":\"SP\",\"basePoints\":2.5}"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.field").value("basePoints"));
     }
 
     @Test

@@ -1,10 +1,9 @@
 package licsys.demerit.app;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDate;
 
-/** Response of POST /api/offences: the OffenceRecorded payload plus {totalPoints, limit, suspensionNotice}. */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+/** Response of POST /api/offences: the OffenceRecorded payload plus {totalPoints, limit, suspensionNotice}.
+ * {@code limit} and {@code licenceClass} are null while the driver is pending registration. */
 public record OffenceResult(
         String driverId,
         String offenceId,
