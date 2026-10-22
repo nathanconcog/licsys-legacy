@@ -17,22 +17,30 @@ services:
       interval: 5s
       retries: 30
   licence-service:
-    build: ./licence-service
+    build:
+      context: ./licence-service
+      args: { MAVEN_MIRROR_URL: "${MAVEN_MIRROR_URL:-}" }
     ports: ["8081:8081"]
     environment: *aws
     depends_on: { localstack: { condition: service_healthy } }
   demerit-service:
-    build: ./demerit-service
+    build:
+      context: ./demerit-service
+      args: { MAVEN_MIRROR_URL: "${MAVEN_MIRROR_URL:-}" }
     ports: ["8082:8082"]
     environment: *aws
     depends_on: { localstack: { condition: service_healthy } }
   registration-service:
-    build: ./registration-service
+    build:
+      context: ./registration-service
+      args: { MAVEN_MIRROR_URL: "${MAVEN_MIRROR_URL:-}" }
     ports: ["8083:8083"]
     environment: *aws
     depends_on: { localstack: { condition: service_healthy } }
   notification-service:
-    build: ./notification-service
+    build:
+      context: ./notification-service
+      args: { MAVEN_MIRROR_URL: "${MAVEN_MIRROR_URL:-}" }
     ports: ["8084:8084"]
     environment: *aws
     depends_on: { localstack: { condition: service_healthy } }
