@@ -1,0 +1,38 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: licence-service
+  jackson:
+    default-property-inclusion: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+      cors:
+        allowed-origins: http://localhost:5173
+        allowed-methods: GET
+  endpoint:
+    health:
+      show-details: never
+
+licsys:
+  aws:
+    # false = in-memory store, logged events and no SQS consumer (unit tests, offline demos)
+    enabled: true
+    endpoint: ${AWS_ENDPOINT_URL:http://localhost:4566}
+    region: ${AWS_REGION:ap-southeast-2}
+    access-key-id: ${AWS_ACCESS_KEY_ID:test}
+    secret-access-key: ${AWS_SECRET_ACCESS_KEY:test}
+  table: licence-drivers
+  event-bus: licsys-bus
+  event-source: licsys.licence
+  inbox:
+    queue: licence-inbox
+    wait-seconds: 5
+    poll-delay-ms: 200
+  cors:
+    allowed-origins: http://localhost:5173
