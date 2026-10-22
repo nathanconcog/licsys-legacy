@@ -1,0 +1,32 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: demerit-service
+  jackson:
+    deserialization:
+      accept-float-as-int: false
+
+licsys:
+  aws:
+    endpoint: ${AWS_ENDPOINT_URL:http://localhost:4566}
+    region: ${AWS_REGION:ap-southeast-2}
+  table: demerit-ledger
+  bus: licsys-bus
+  source: licsys.demerit
+  inbox:
+    queue: demerit-inbox
+    enabled: true
+  cors:
+    allowed-origins: http://localhost:5173
+
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-origins: ${licsys.cors.allowed-origins}
+        allowed-methods: GET
+  endpoint:
+    health:
+      show-details: never
