@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Activity, Boxes, Car, GitCompareArrows, RotateCcw, Search, UserRound } from 'lucide-react'
 import { useState } from 'react'
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
@@ -175,11 +175,9 @@ export function Layout() {
         </nav>
 
         <main className="flex-1 px-5 py-7 lg:px-8">
-          <AnimatePresence mode="wait">
-            <motion.div key={section} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.18 }}>
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
+          <motion.div key={section} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.18 }}>
+            <Outlet />
+          </motion.div>
         </main>
         <footer className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-200/80 px-5 py-4 text-[11.5px] text-slate-400 lg:px-8">
           <span>
