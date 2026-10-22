@@ -92,6 +92,7 @@ function recordOffence(input: OffenceInput) {
     basePoints: input.basePoints,
     appliedPoints: br05.appliedPoints,
     doubled: br05.doubled,
+    alreadyPosted: !!input.alreadyPosted,
     rule: br05.rule,
     reason: input.alreadyPosted
       ? `Imported from the legacy ledger as already posted, so no points were added. ${br05.reason}`

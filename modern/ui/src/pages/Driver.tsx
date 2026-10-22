@@ -472,6 +472,7 @@ function OffenceTimeline({ demerits, error }: { demerits?: Demerits; error?: str
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span className="text-[13px] font-medium text-slate-900">{OFFENCE_LABELS[o.code] ?? OFFENCE_CLASSES[o.offenceClass] ?? o.code}</span>
                   <span className="font-mono text-[11px] text-slate-400">{o.code}</span>
+                  {o.alreadyPosted && <Pill tone="slate">legacy history</Pill>}
                   {o.doubled && (
                     <Pill tone="red">
                       <Flame className="h-3 w-3" /> double demerits
@@ -481,11 +482,18 @@ function OffenceTimeline({ demerits, error }: { demerits?: Demerits; error?: str
                 <div className="mt-0.5 text-xs text-slate-500">{formatDate(o.date)}</div>
               </div>
               <div className="flex shrink-0 flex-col items-end gap-1 pt-0.5">
+                {o.alreadyPosted ? (
+                  <div className="text-sm tabular-nums text-slate-500">
+                    {o.basePoints}
+                    <span className="ml-1 text-xs text-slate-400">pts, already counted</span>
+                  </div>
+                ) : (
                 <div className="text-sm tabular-nums">
                   {o.doubled && <span className="mr-1.5 text-xs text-slate-400 line-through">{o.basePoints}</span>}
                   <span className={clsx('font-semibold', o.doubled ? 'text-rose-600' : 'text-slate-800')}>+{o.appliedPoints}</span>
                   <span className="ml-1 text-xs text-slate-400">pts</span>
                 </div>
+                )}
                 <Why rule={o.rule} reason={o.reason} align="right" title="Points applied" />
               </div>
             </motion.li>

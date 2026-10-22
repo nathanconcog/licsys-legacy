@@ -40,6 +40,7 @@ export interface OffenceRecorded {
   basePoints: number
   appliedPoints: number
   doubled: boolean
+  alreadyPosted?: boolean
   rule: string
   reason: string
 }
