@@ -26,7 +26,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * Replays the legacy DMRPTS fixtures in {@code tests/cases/} through the service and compares with the COBOL
  * goldens ({@code expected/out/POSTINGS.rpt}, {@code NOTICES.rpt}, {@code DRVMAST.posted}). The goldens record
- * what the COBOL does, so the only allowed differences are the BR-05 same-class corrections listed per case.
+ * what the COBOL does, so the only allowed differences are the policy corrections listed per case (none since
+ * DMRPTS applies the BR-05 same-class rule).
  */
 class LegacyFixtureTest {
 
@@ -38,17 +39,13 @@ class LegacyFixtureTest {
     }
 
     static Stream<Arguments> cases() {
-        Map<String, Correction> c02 = Map.of(
-                "M0000003", new Correction(4, false, 4),   // SP then MP
-                "M0000004", new Correction(3, false, 3));  // GN then SP
-        Map<String, Correction> c01 = Map.of(
-                "D0000009", new Correction(4, false, 10),  // Isla: SP then MP
-                "D0000013", new Correction(3, false, 5));  // Maya: MP then SB
+        Map<String, Correction> c02 = Map.of();
+        Map<String, Correction> c01 = Map.of();
         return Stream.of(
                 Arguments.of("02-dmrpts-demerits", c02, Set.of(), false),
                 Arguments.of("02-dmrpts-demerits", c02, Set.of(), true),
-                Arguments.of("01-shipped-sample", c01, Set.of("D0000009"), false),
-                Arguments.of("01-shipped-sample", c01, Set.of("D0000009"), true));
+                Arguments.of("01-shipped-sample", c01, Set.of(), false),
+                Arguments.of("01-shipped-sample", c01, Set.of(), true));
     }
 
     @ParameterizedTest(name = "{0} (offences before registration: {3})")
