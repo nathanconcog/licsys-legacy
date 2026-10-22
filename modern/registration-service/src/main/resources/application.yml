@@ -1,0 +1,21 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: registration-service
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+licsys:
+  aws:
+    endpoint: ${AWS_ENDPOINT_URL:http://localhost:4566}
+    region: ${AWS_REGION:ap-southeast-2}
+    access-key-id: ${AWS_ACCESS_KEY_ID:test}
+    secret-access-key: ${AWS_SECRET_ACCESS_KEY:test}
+  registration:
+    table: registration-renewals
+  bus: licsys-bus
+  cors:
+    allowed-origins: http://localhost:5173
