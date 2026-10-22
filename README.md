@@ -6,5 +6,6 @@ Driver licensing nightly batch.
 
     ./build.sh          # needs GnuCOBOL 3.x  (apt-get install gnucobol)
     ./run_nightly.sh    # reads data/, writes out/
+    tests/run_tests.sh  # regression tests (see tests/README.md)
 
 Ops contact: batch desk ext 4471
