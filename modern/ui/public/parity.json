@@ -1,0 +1,296 @@
+{
+  "generatedAt": "2026-10-21T02:14:09Z",
+  "summary": {
+    "drivers": 13,
+    "matched": 8,
+    "expectedDifferences": 5,
+    "unexpected": 0,
+    "renewals": 10,
+    "renewalMatched": 10
+  },
+  "drivers": [
+    {
+      "driverId": "D0000001",
+      "name": "Alice Nguyen",
+      "legacy": {
+        "licenceClass": "P2",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P2",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": "BR-02",
+      "reason": "Held P1 for 414 days (\u2265 365) with 0 points. Both systems progress Alice from P1 to P2 on 2026-10-20."
+    },
+    {
+      "driverId": "D0000002",
+      "name": "Ben Kowalski",
+      "legacy": {
+        "licenceClass": "P1",
+        "points": 1,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P1",
+        "points": 1,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": "BR-02",
+      "reason": "233 of the 365 days needed on P1. Both systems leave Ben on P1."
+    },
+    {
+      "driverId": "D0000003",
+      "name": "Chloe Patel",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": "BR-03",
+      "reason": "810 days on P2 counted from the P2 date (legacy counted 1,193 from P1). Both are over 730, so both progress Chloe to Open."
+    },
+    {
+      "driverId": "D0000004",
+      "name": "Daniel O'Brien",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 1,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P2",
+        "points": 1,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-03",
+      "reason": "P2 was issued on 2025-06-15, so Daniel has 492 of the 730 days he needs. Legacy LICUPG counted from the P1 date (871 days) and upgraded him to Open early."
+    },
+    {
+      "driverId": "D0000005",
+      "name": "Emma Taylor",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P2",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-03",
+      "reason": "P2 was issued on 2025-03-10, so Emma has 589 of the 730 days she needs. Legacy counted from the P1 date (963 days) and upgraded her to Open early."
+    },
+    {
+      "driverId": "D0000006",
+      "name": "Farid Hassan",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 8,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 8,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": "BR-04",
+      "reason": "No new offences. 8 points is under the Open limit of 12 in both systems."
+    },
+    {
+      "driverId": "D0000007",
+      "name": "Grace Liu",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 2,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 2,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": "BR-03",
+      "reason": "782 days on P2 (902 days less 120 suspended) and 2 points. Both systems progress Grace to Open."
+    },
+    {
+      "driverId": "D0000008",
+      "name": "Henry Walker",
+      "legacy": {
+        "licenceClass": "P1",
+        "points": 5,
+        "suspensionNotice": true
+      },
+      "modern": {
+        "licenceClass": "P1",
+        "points": 5,
+        "suspensionNotice": true
+      },
+      "status": "MATCH",
+      "rule": "BR-04",
+      "reason": "A first SP offence adds 3 points, taking Henry to 5 against a P1 limit of 4. Both systems issue a suspension notice."
+    },
+    {
+      "driverId": "D0000009",
+      "name": "Isla Morgan",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 14,
+        "suspensionNotice": true
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 10,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-05",
+      "reason": "The MP offence on 2026-09-05 followed an SP offence, not an MP one. BR-05 only doubles a repeat of the same class, so it costs 4 points and Isla ends on 10, below the limit of 12. Legacy DMRPTS doubled it to 8 points (14 in total) and wrongly issued a suspension notice."
+    },
+    {
+      "driverId": "D0000010",
+      "name": "Jack Robinson",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 11,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 11,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": "BR-05",
+      "reason": "A repeat SP offence 257 days after the previous SP. Both systems double it from 4 to 8 points, for 11 in total."
+    },
+    {
+      "driverId": "D0000011",
+      "name": "Kirra Smith",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 3,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 3,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": "BR-05",
+      "reason": "The previous SB offence was 516 days earlier, outside the 365-day window. Normal points apply in both systems."
+    },
+    {
+      "driverId": "D0000012",
+      "name": "Liam Brown",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 3,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P2",
+        "points": 3,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-03",
+      "reason": "P2 was issued on 2025-02-01, so Liam has 626 of the 730 days he needs. Legacy counted from the P1 date (1,009 days) and upgraded him to Open early."
+    },
+    {
+      "driverId": "D0000013",
+      "name": "Maya Rossi",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 8,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 5,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-05",
+      "reason": "The SB offence on 2026-07-10 followed an MP offence, a different class, so it costs 3 points and Maya ends on 5. Legacy DMRPTS doubled it to 6 points (8 in total)."
+    }
+  ],
+  "renewals": [
+    {
+      "plate": "123ABC",
+      "legacyTotal": "415.50",
+      "modernTotal": "415.50",
+      "match": true
+    },
+    {
+      "plate": "456DEF",
+      "legacyTotal": "319.96",
+      "modernTotal": "319.96",
+      "match": true
+    },
+    {
+      "plate": "789GHI",
+      "legacyTotal": "226.26",
+      "modernTotal": "226.26",
+      "match": true
+    },
+    {
+      "plate": "234JKL",
+      "legacyTotal": "182.55",
+      "modernTotal": "182.55",
+      "match": true
+    },
+    {
+      "plate": "567MNO",
+      "legacyTotal": "52.85",
+      "modernTotal": "52.85",
+      "match": true
+    },
+    {
+      "plate": "890PQR",
+      "legacyTotal": "120.95",
+      "modernTotal": "120.95",
+      "match": true
+    },
+    {
+      "plate": "345STU",
+      "legacyTotal": "123.28",
+      "modernTotal": "123.28",
+      "match": true
+    },
+    {
+      "plate": "678VWX",
+      "legacyTotal": "92.84",
+      "modernTotal": "92.84",
+      "match": true
+    },
+    {
+      "plate": "901YZA",
+      "legacyTotal": null,
+      "modernTotal": null,
+      "match": true
+    },
+    {
+      "plate": "112BCD",
+      "legacyTotal": null,
+      "modernTotal": null,
+      "match": true
+    }
+  ]
+}
