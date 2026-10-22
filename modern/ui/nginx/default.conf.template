@@ -1,0 +1,57 @@
+# Same routes as the Vite dev proxy: /<service>/... -> <service>-service:<port>/... (prefix stripped).
+# Upstreams resolve at request time, so the UI starts even when a service is not up yet.
+resolver ${DNS_RESOLVER} valid=10s ipv6=off;
+
+server {
+    listen 5173;
+    server_name _;
+    root /usr/share/nginx/html;
+
+    gzip on;
+    gzip_types text/css application/javascript application/json image/svg+xml;
+
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    location = /healthz { access_log off; return 200 "ok\n"; }
+
+    location ^~ /licence/ {
+        set $upstream ${LICENCE_UPSTREAM};
+        rewrite ^/licence/(.*)$ /$1 break;
+        proxy_pass http://$upstream;
+    }
+
+    location ^~ /demerit/ {
+        set $upstream ${DEMERIT_UPSTREAM};
+        rewrite ^/demerit/(.*)$ /$1 break;
+        proxy_pass http://$upstream;
+    }
+
+    location ^~ /registration/ {
+        set $upstream ${REGISTRATION_UPSTREAM};
+        rewrite ^/registration/(.*)$ /$1 break;
+        proxy_pass http://$upstream;
+    }
+
+    location ^~ /notification/ {
+        set $upstream ${NOTIFICATION_UPSTREAM};
+        rewrite ^/notification/(.*)$ /$1 break;
+        proxy_pass http://$upstream;
+        # Server-sent events: no buffering, long-lived connection.
+        proxy_set_header Connection "";
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_read_timeout 1h;
+    }
+
+    location /assets/ {
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        try_files $uri =404;
+    }
+
+    location / {
+        add_header Cache-Control "no-cache";
+        try_files $uri $uri/ /index.html;
+    }
+}
