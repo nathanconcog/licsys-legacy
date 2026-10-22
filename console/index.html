@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LICSYS - Driver Licence Enquiry</title>
+<style>
+  :root { --g:#33ff66; --dim:#1f9e40; --amber:#ffcc33; --red:#ff4d4d; --cyan:#66e0ff; --bg:#020a04; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#111; display:flex; justify-content:center; align-items:center; min-height:100vh;
+         font-family:"IBM Plex Mono","Courier New",monospace; }
+  .bezel { background:#2a2a2a; padding:28px; border-radius:22px; box-shadow:0 0 0 4px #1a1a1a, 0 30px 80px #000; }
+  .crt { position:relative; width:1040px; min-height:680px; background:var(--bg); color:var(--g); padding:22px 30px;
+         border-radius:10px; font-size:18px; line-height:1.45; text-shadow:0 0 6px rgba(51,255,102,.55); overflow:hidden; }
+  .crt::after { content:""; position:absolute; inset:0; pointer-events:none;
+         background:repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.22) 2px 3px); }
+  pre { margin:0; font:inherit; white-space:pre; }
+  .hdr { display:flex; justify-content:space-between; color:var(--cyan); }
+  .title { white-space:pre; text-align:center; color:#fff; letter-spacing:2px; margin:6px 0 14px; }
+  .dim { color:var(--dim); } .amber { color:var(--amber); } .red { color:var(--red); text-shadow:0 0 8px rgba(255,77,77,.7); }
+  .cyan { color:var(--cyan); } .white { color:#fff; }
+  .blink { animation:blink 1s steps(1) infinite; } @keyframes blink { 50% { opacity:0; } }
+  input { background:transparent; border:none; border-bottom:2px solid var(--g); color:#fff; font:inherit; width:9ch;
+          outline:none; text-transform:uppercase; text-shadow:inherit; caret-color:var(--g); }
+  .rule { color:var(--dim); margin:8px 0; }
+  .alert { border:2px solid var(--red); padding:6px 12px; margin-top:10px; display:inline-block; }
+  .ok { border:2px solid var(--g); padding:6px 12px; margin-top:10px; display:inline-block; }
+  .pf { position:absolute; bottom:18px; left:30px; right:30px; display:flex; gap:28px; color:var(--cyan); }
+  .pf span { cursor:pointer; } .pf span:hover { color:#fff; }
+  .msg { position:absolute; bottom:46px; left:30px; color:var(--amber); }
+  table { border-collapse:collapse; font:inherit; } td { padding:0 14px 0 0; }
+  .list td { cursor:pointer; } .list tr:hover td { color:#fff; }
+</style>
+</head>
+<body>
+<div class="bezel"><div class="crt" id="crt">
+  <div class="hdr"><span>LICSYS  TRAN: DLQ1</span><span id="clock"></span></div>
+  <div class="title">D R I V E R   L I C E N C E   E N Q U I R Y</div>
+  <div>DRIVER NO ===&gt; <input id="drv" maxlength="8" autocomplete="off" autofocus> <span class="dim">(ENTER = ENQUIRE)</span></div>
+  <div class="rule">────────────────────────────────────────────────────────────────────────────────────────</div>
+  <div id="body"></div>
+  <div class="msg" id="msg"></div>
+  <div class="pf">
+    <span data-k="F2">F2=DRIVER LIST</span><span data-k="F5">F5=RUN NIGHTLY BATCH</span>
+    <span data-k="F12">F12=CLEAR</span><span class="dim">BATCH DESK EXT 4471</span>
+  </div>
+</div></div>
+<script>
+const $ = s => document.querySelector(s);
+const fmtDate = d => d && d !== "00000000" ? `${d.slice(6,8)}/${d.slice(4,6)}/${d.slice(0,4)}` : "--/--/----";
+const pad = (s, n) => String(s).padEnd(n);
+const msg = t => { $("#msg").textContent = t || ""; };
+let runDate = "";
+
+function tick() {
+  const n = new Date();
+  $("#clock").textContent = `RUN DATE ${fmtDate(runDate)}   ${n.toTimeString().slice(0,8)}`;
+}
+setInterval(tick, 1000);
+fetch("/api/rundate").then(r => r.json()).then(j => { runDate = j.rundate; tick(); });
+
+async function list() {
+  const ds = await (await fetch("/api/drivers")).json();
+  $("#body").innerHTML = `<div class="cyan">DRIVER    NAME                  CLASS</div><table class="list">` +
+    ds.map(d => `<tr data-id="${d.id}"><td>${d.id}</td><td>${pad(d.name,20)}</td><td>${d.cls}</td></tr>`).join("") + "</table>";
+  document.querySelectorAll(".list tr").forEach(tr => tr.onclick = () => { $("#drv").value = tr.dataset.id; enquire(); });
+  msg("SELECT A DRIVER OR KEY A DRIVER NUMBER");
+}
+
+async function enquire() {
+  let id = $("#drv").value.trim().toUpperCase();
+  if (/^\d+$/.test(id)) id = "D" + id.padStart(7, "0");
+  $("#drv").value = id;
+  const r = await fetch("/api/driver/" + id);
+  const v = await r.json();
+  if (!r.ok) { $("#body").innerHTML = ""; msg(`DLQ004E ${v.error}`); return; }
+  const b = v.before, a = v.after || v.before;
+  const offRows = v.offences.map(o => {
+    const applied = o.applied == null ? `<span class="dim">POSTED PREVIOUSLY</span>`
+      : (o.double ? `<span class="amber">${o.applied} PTS  ** DOUBLE DEMERITS **</span>` : `${o.applied} PTS`);
+    return `<tr><td>${fmtDate(o.date)}</td><td>${o.code}</td><td>${o.cls}</td><td>${o.base}</td><td>${applied}</td></tr>`;
+  }).join("");
+  let status;
+  if (!v.batch_run) status = `<div class="dim">NIGHTLY BATCH NOT YET RUN - PRESS F5</div>`;
+  else if (v.notice) status = `<div class="alert red"><span class="blink">***</span> SUSPENSION NOTICE ISSUED: ${a.points} PTS, LIMIT ${v.limit} <span class="blink">***</span></div>`;
+  else status = `<div class="ok">LICENCE IN GOOD STANDING: ${a.points} PTS, LIMIT ${v.limit}</div>`;
+  const upg = v.upgrade ? `<div class="amber">LICENCE UPGRADED TONIGHT: ${v.upgrade.from} -&gt; ${v.upgrade.to}</div>` : "";
+  $("#body").innerHTML = `
+<pre>NAME      : <span class="white">${pad(b.name,22)}</span>  DOB      : ${fmtDate(b.dob)}
+CLASS     : <span class="white">${pad(a.cls + " " + v.class_name,22)}</span>  ISSUED   : ${fmtDate(a.class_date)}
+P1 ISSUED : ${pad(fmtDate(b.p1_date),22)}  SUSP DAYS: ${a.susp_days}
+POINTS    : ${b.points} BEFORE BATCH  -&gt;  <span class="white">${a.points} AFTER BATCH</span>   (LIMIT ${v.limit})</pre>
+<div class="rule">── OFFENCE HISTORY ──────────────────────────────────────────────────────────────────────</div>
+<table><tr class="cyan"><td>DATE</td><td>CODE</td><td>CL</td><td>BASE</td><td>APPLIED TONIGHT</td></tr>${offRows ||
+  '<tr><td class="dim">NO OFFENCES ON FILE</td></tr>'}</table>
+<div class="rule">── NIGHTLY OUTCOME ───────────────────────────────────────────────────────────────────────</div>
+${upg}${status}`;
+  msg("DLQ001I ENQUIRY COMPLETE");
+}
+
+async function runBatch() {
+  msg("DLQ010I SUBMITTING LICNIGHT ... DMRPTS / LICUPG / REGFEE");
+  const j = await (await fetch("/api/run-nightly", { method: "POST" })).json();
+  msg(j.ok ? "DLQ011I LICNIGHT ENDED RC=0000" : "DLQ012E LICNIGHT ABENDED - SEE BATCH DESK");
+  if ($("#drv").value.trim()) enquire();
+}
+
+function clear() { $("#drv").value = ""; $("#body").innerHTML = ""; msg(""); $("#drv").focus(); }
+const keys = { F2: list, F5: runBatch, F12: clear };
+document.addEventListener("keydown", e => {
+  if (keys[e.key]) { e.preventDefault(); keys[e.key](); }
+  else if (e.key === "Enter") enquire();
+});
+document.querySelectorAll(".pf span[data-k]").forEach(s => s.onclick = () => keys[s.dataset.k]());
+const qd = new URLSearchParams(location.search).get("drv");
+if (qd) { $("#drv").value = qd; enquire(); }
+document.addEventListener("click", e => { if (!e.target.closest(".list")) $("#drv").focus(); });
+</script>
+</body>
+</html>

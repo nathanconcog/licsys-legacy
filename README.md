@@ -9,3 +9,7 @@ Driver licensing nightly batch.
     tests/run_tests.sh  # regression tests (see tests/README.md)
 
 Ops contact: batch desk ext 4471
+
+Operator console (driver enquiry, F5 runs the batch):
+
+    python3 console/server.py 8080   # http://localhost:8080
