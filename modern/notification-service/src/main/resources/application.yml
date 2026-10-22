@@ -1,0 +1,25 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: notification-service
+  mvc:
+    async:
+      request-timeout: -1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+licsys:
+  aws:
+    endpoint: ${AWS_ENDPOINT_URL:http://localhost:4566}
+    region: ${AWS_REGION:ap-southeast-2}
+    access-key: ${AWS_ACCESS_KEY_ID:test}
+    secret-key: ${AWS_SECRET_ACCESS_KEY:test}
+  table: notification-activity
+  event-bus: licsys-bus
+  notification-queue: notification-inbox
+  activity-queue: activity-inbox
+  sqs-wait-seconds: 1
+  consumers-enabled: true
