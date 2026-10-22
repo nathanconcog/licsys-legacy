@@ -1,0 +1,6 @@
+node_modules/
+cdk.out/
+*.js
+!lambda/**/*.mjs
+!jest.config.js
+*.d.ts

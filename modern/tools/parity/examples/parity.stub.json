@@ -1,0 +1,296 @@
+{
+  "generatedAt": "2026-10-22T02:19:23Z",
+  "summary": {
+    "drivers": 13,
+    "matched": 8,
+    "expectedDifferences": 5,
+    "unexpected": 0,
+    "renewals": 10,
+    "renewalMatched": 10
+  },
+  "drivers": [
+    {
+      "driverId": "D0000001",
+      "name": "ALICE NGUYEN",
+      "legacy": {
+        "licenceClass": "P2",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P2",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "driverId": "D0000002",
+      "name": "BEN KOWALSKI",
+      "legacy": {
+        "licenceClass": "P1",
+        "points": 1,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P1",
+        "points": 1,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "driverId": "D0000003",
+      "name": "CHLOE PATEL",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "driverId": "D0000004",
+      "name": "DANIEL OBRIEN",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 1,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P2",
+        "points": 1,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-03",
+      "reason": "COBOL LICUPG counts P2 tenure from the P1 date 2024-06-01 (871 days) and upgraded to OP; BR-03 counts from the P2 issue date 2025-06-15 (492 days < 730), so the driver stays P2"
+    },
+    {
+      "driverId": "D0000005",
+      "name": "EMMA TAYLOR",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P2",
+        "points": 0,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-03",
+      "reason": "COBOL LICUPG counts P2 tenure from the P1 date 2024-03-01 (963 days) and upgraded to OP; BR-03 counts from the P2 issue date 2025-03-10 (589 days < 730), so the driver stays P2"
+    },
+    {
+      "driverId": "D0000006",
+      "name": "FARID HASSAN",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 8,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 8,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "driverId": "D0000007",
+      "name": "GRACE LIU",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 2,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 2,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "driverId": "D0000008",
+      "name": "HENRY WALKER",
+      "legacy": {
+        "licenceClass": "P1",
+        "points": 5,
+        "suspensionNotice": true
+      },
+      "modern": {
+        "licenceClass": "P1",
+        "points": 5,
+        "suspensionNotice": true
+      },
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "driverId": "D0000009",
+      "name": "ISLA MORGAN",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 14,
+        "suspensionNotice": true
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 10,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-05",
+      "reason": "MP MP01 on 2026-09-05 was doubled by COBOL because of a SP offence on 2026-01-10. BR-05 only doubles a repeat offence of the same class: legacy 14 points, policy 10; that pushes legacy over the 12-point limit and issues a suspension notice"
+    },
+    {
+      "driverId": "D0000010",
+      "name": "JACK ROBINSON",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 11,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 11,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "driverId": "D0000011",
+      "name": "KIRRA SMITH",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 3,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 3,
+        "suspensionNotice": false
+      },
+      "status": "MATCH",
+      "rule": null,
+      "reason": null
+    },
+    {
+      "driverId": "D0000012",
+      "name": "LIAM BROWN",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 3,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "P2",
+        "points": 3,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-03",
+      "reason": "COBOL LICUPG counts P2 tenure from the P1 date 2024-01-15 (1009 days) and upgraded to OP; BR-03 counts from the P2 issue date 2025-02-01 (626 days < 730), so the driver stays P2"
+    },
+    {
+      "driverId": "D0000013",
+      "name": "MAYA ROSSI",
+      "legacy": {
+        "licenceClass": "OP",
+        "points": 8,
+        "suspensionNotice": false
+      },
+      "modern": {
+        "licenceClass": "OP",
+        "points": 5,
+        "suspensionNotice": false
+      },
+      "status": "EXPECTED_DIFFERENCE",
+      "rule": "BR-05",
+      "reason": "SB SB01 on 2026-07-10 was doubled by COBOL because of a MP offence on 2026-02-01. BR-05 only doubles a repeat offence of the same class: legacy 8 points, policy 5"
+    }
+  ],
+  "renewals": [
+    {
+      "plate": "123ABC",
+      "legacyTotal": "415.50",
+      "modernTotal": "415.50",
+      "match": true
+    },
+    {
+      "plate": "456DEF",
+      "legacyTotal": "319.96",
+      "modernTotal": "319.96",
+      "match": true
+    },
+    {
+      "plate": "789GHI",
+      "legacyTotal": "226.26",
+      "modernTotal": "226.26",
+      "match": true
+    },
+    {
+      "plate": "234JKL",
+      "legacyTotal": "182.55",
+      "modernTotal": "182.55",
+      "match": true
+    },
+    {
+      "plate": "567MNO",
+      "legacyTotal": "52.85",
+      "modernTotal": "52.85",
+      "match": true
+    },
+    {
+      "plate": "890PQR",
+      "legacyTotal": "120.95",
+      "modernTotal": "120.95",
+      "match": true
+    },
+    {
+      "plate": "345STU",
+      "legacyTotal": "123.28",
+      "modernTotal": "123.28",
+      "match": true
+    },
+    {
+      "plate": "678VWX",
+      "legacyTotal": "92.84",
+      "modernTotal": "92.84",
+      "match": true
+    },
+    {
+      "plate": "901YZA",
+      "legacyTotal": null,
+      "modernTotal": null,
+      "match": true
+    },
+    {
+      "plate": "112BCD",
+      "legacyTotal": null,
+      "modernTotal": null,
+      "match": true
+    }
+  ]
+}

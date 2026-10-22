@@ -1,0 +1,6889 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`synthesized template snapshot 1`] = `
+{
+  "Outputs": {
+    "ApiUrl": {
+      "Value": {
+        "Fn::GetAtt": [
+          "HttpApiF5A9A8A7",
+          "ApiEndpoint",
+        ],
+      },
+    },
+    "DemeritRepoUri": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            {
+              "Fn::Select": [
+                4,
+                {
+                  "Fn::Split": [
+                    ":",
+                    {
+                      "Fn::GetAtt": [
+                        "DemeritRepoA26E80C8",
+                        "Arn",
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            ".dkr.ecr.",
+            {
+              "Fn::Select": [
+                3,
+                {
+                  "Fn::Split": [
+                    ":",
+                    {
+                      "Fn::GetAtt": [
+                        "DemeritRepoA26E80C8",
+                        "Arn",
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            {
+              "Ref": "DemeritRepoA26E80C8",
+            },
+          ],
+        ],
+      },
+    },
+    "EventBusName": {
+      "Value": {
+        "Ref": "BusEA82B648",
+      },
+    },
+    "LicenceRepoUri": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            {
+              "Fn::Select": [
+                4,
+                {
+                  "Fn::Split": [
+                    ":",
+                    {
+                      "Fn::GetAtt": [
+                        "LicenceRepoE9F6B48D",
+                        "Arn",
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            ".dkr.ecr.",
+            {
+              "Fn::Select": [
+                3,
+                {
+                  "Fn::Split": [
+                    ":",
+                    {
+                      "Fn::GetAtt": [
+                        "LicenceRepoE9F6B48D",
+                        "Arn",
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            {
+              "Ref": "LicenceRepoE9F6B48D",
+            },
+          ],
+        ],
+      },
+    },
+    "NotificationRepoUri": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            {
+              "Fn::Select": [
+                4,
+                {
+                  "Fn::Split": [
+                    ":",
+                    {
+                      "Fn::GetAtt": [
+                        "NotificationRepo6E06F044",
+                        "Arn",
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            ".dkr.ecr.",
+            {
+              "Fn::Select": [
+                3,
+                {
+                  "Fn::Split": [
+                    ":",
+                    {
+                      "Fn::GetAtt": [
+                        "NotificationRepo6E06F044",
+                        "Arn",
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            {
+              "Ref": "NotificationRepo6E06F044",
+            },
+          ],
+        ],
+      },
+    },
+    "RegistrationRepoUri": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            {
+              "Fn::Select": [
+                4,
+                {
+                  "Fn::Split": [
+                    ":",
+                    {
+                      "Fn::GetAtt": [
+                        "RegistrationRepo4F684F89",
+                        "Arn",
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            ".dkr.ecr.",
+            {
+              "Fn::Select": [
+                3,
+                {
+                  "Fn::Split": [
+                    ":",
+                    {
+                      "Fn::GetAtt": [
+                        "RegistrationRepo4F684F89",
+                        "Arn",
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            ".",
+            {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            {
+              "Ref": "RegistrationRepo4F684F89",
+            },
+          ],
+        ],
+      },
+    },
+    "UserPoolClientId": {
+      "Value": {
+        "Ref": "UserPoolUiClient88FBD82C",
+      },
+    },
+    "UserPoolId": {
+      "Value": {
+        "Ref": "UserPool6BA7E5F2",
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "AlarmTopicD01E77F9": {
+      "Properties": {
+        "TopicName": "licsys-alarms",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "AlarmTopicPolicy309DB5F8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sns:Publish",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": {
+                "Ref": "AlarmTopicD01E77F9",
+              },
+              "Sid": "AllowPublishThroughSSLOnly",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Topics": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::TopicPolicy",
+    },
+    "AlarmactivityinboxageFED11E4C": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "activity-inbox oldest message older than 15 minutes",
+        "AlarmName": "licsys-activity-inbox-age",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "activityinbox150A4EE0",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateAgeOfOldestMessage",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 900,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmactivityinboxdlq8FB580C1": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "Messages in activity-inbox-dlq (poison events)",
+        "AlarmName": "licsys-activity-inbox-dlq",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "activityinboxdlq79E63AC3",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateNumberOfMessagesVisible",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmbusdeliverydlq426DA5D3": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "EventBridge could not deliver events to an inbox queue",
+        "AlarmName": "licsys-bus-delivery-dlq",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "BusDeliveryDlq9197407C",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateNumberOfMessagesVisible",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmdemeritinboxage434072D4": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "demerit-inbox oldest message older than 15 minutes",
+        "AlarmName": "licsys-demerit-inbox-age",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "demeritinboxA4936D57",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateAgeOfOldestMessage",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 900,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmdemeritinboxdlq0CC57A67": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "Messages in demerit-inbox-dlq (poison events)",
+        "AlarmName": "licsys-demerit-inbox-dlq",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "demeritinboxdlqCD7CDEBD",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateNumberOfMessagesVisible",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmdemeritservice5xxB3BD483F": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "demerit-service returned 5xx responses",
+        "AlarmName": "licsys-demerit-service-5xx",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      2,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "AlbHttpDemeritTargetsGroup2C9C4DFF",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "HTTPCode_Target_5XX_Count",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 300,
+        "Statistic": "Sum",
+        "Threshold": 5,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmdemeritservicecpu09A9925C": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "demerit-service CPU above 85%",
+        "AlarmName": "licsys-demerit-service-cpu",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "ClusterName",
+            "Value": {
+              "Ref": "ClusterEB0386A7",
+            },
+          },
+          {
+            "Name": "ServiceName",
+            "Value": {
+              "Fn::GetAtt": [
+                "DemeritServiceC150C664",
+                "Name",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "CPUUtilization",
+        "Namespace": "AWS/ECS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 85,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "AlarmdemeritserviceunhealthyA7A952EE": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "demerit-service has unhealthy targets",
+        "AlarmName": "licsys-demerit-service-unhealthy",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      2,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "AlbHttpDemeritTargetsGroup2C9C4DFF",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "UnHealthyHostCount",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 60,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmhttpapi5xxD0497ACE": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "HTTP API returning 5xx",
+        "AlarmName": "licsys-http-api-5xx",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "ApiId",
+            "Value": {
+              "Ref": "HttpApiF5A9A8A7",
+            },
+          },
+          {
+            "Name": "Stage",
+            "Value": "$default",
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "5xx",
+        "Namespace": "AWS/ApiGateway",
+        "Period": 300,
+        "Statistic": "Sum",
+        "Threshold": 10,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmlicenceinboxage2A953681": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "licence-inbox oldest message older than 15 minutes",
+        "AlarmName": "licsys-licence-inbox-age",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "licenceinboxDCCE0223",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateAgeOfOldestMessage",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 900,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmlicenceinboxdlq5B1D5B07": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "Messages in licence-inbox-dlq (poison events)",
+        "AlarmName": "licsys-licence-inbox-dlq",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "licenceinboxdlq948D5FA5",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateNumberOfMessagesVisible",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmlicenceservice5xxA51E7AC1": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "licence-service returned 5xx responses",
+        "AlarmName": "licsys-licence-service-5xx",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      2,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "AlbHttpLicenceTargetsGroup6D5C0867",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "HTTPCode_Target_5XX_Count",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 300,
+        "Statistic": "Sum",
+        "Threshold": 5,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "AlarmlicenceservicecpuE791C1F2": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "licence-service CPU above 85%",
+        "AlarmName": "licsys-licence-service-cpu",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "ClusterName",
+            "Value": {
+              "Ref": "ClusterEB0386A7",
+            },
+          },
+          {
+            "Name": "ServiceName",
+            "Value": {
+              "Fn::GetAtt": [
+                "LicenceServiceDA0FCD48",
+                "Name",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "CPUUtilization",
+        "Namespace": "AWS/ECS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 85,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmlicenceserviceunhealthy805198BC": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "licence-service has unhealthy targets",
+        "AlarmName": "licsys-licence-service-unhealthy",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      2,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "AlbHttpLicenceTargetsGroup6D5C0867",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "UnHealthyHostCount",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 60,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmnotificationinboxage57B8B8D8": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "notification-inbox oldest message older than 15 minutes",
+        "AlarmName": "licsys-notification-inbox-age",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "notificationinbox20AF2040",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateAgeOfOldestMessage",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 900,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmnotificationinboxdlq9BBABF8B": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "Messages in notification-inbox-dlq (poison events)",
+        "AlarmName": "licsys-notification-inbox-dlq",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "notificationinboxdlq9913724F",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateNumberOfMessagesVisible",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmnotificationservice5xxF9805F2B": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "notification-service returned 5xx responses",
+        "AlarmName": "licsys-notification-service-5xx",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      2,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "AlbHttpNotificationTargetsGroupDB6286A1",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "HTTPCode_Target_5XX_Count",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 300,
+        "Statistic": "Sum",
+        "Threshold": 5,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmnotificationservicecpu36EE9635": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "notification-service CPU above 85%",
+        "AlarmName": "licsys-notification-service-cpu",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "ClusterName",
+            "Value": {
+              "Ref": "ClusterEB0386A7",
+            },
+          },
+          {
+            "Name": "ServiceName",
+            "Value": {
+              "Fn::GetAtt": [
+                "NotificationService2154020D",
+                "Name",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "CPUUtilization",
+        "Namespace": "AWS/ECS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 85,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "AlarmnotificationserviceunhealthyD10008C5": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "notification-service has unhealthy targets",
+        "AlarmName": "licsys-notification-service-unhealthy",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      2,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "AlbHttpNotificationTargetsGroupDB6286A1",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "UnHealthyHostCount",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 60,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "AlarmprogressionrunfailedBFD92DB2": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "Nightly progression run (was LICNIGHT STEP020) failed",
+        "AlarmName": "licsys-progression-run-failed",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "ProgressionTrigger70A7ECB7",
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "Errors",
+        "Namespace": "AWS/Lambda",
+        "Period": 3600,
+        "Statistic": "Sum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "AlarmprogressionscheduledlqAF70A408": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "Scheduler could not invoke the nightly progression run",
+        "AlarmName": "licsys-progression-schedule-dlq",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "ScheduleDlqBC80447A",
+                "QueueName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateNumberOfMessagesVisible",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmregistrationservice5xx7BB9793E": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "registration-service returned 5xx responses",
+        "AlarmName": "licsys-registration-service-5xx",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      2,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "AlbHttpRegistrationTargetsGroup2E796A7B",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "HTTPCode_Target_5XX_Count",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 300,
+        "Statistic": "Sum",
+        "Threshold": 5,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "AlarmregistrationservicecpuB6F126AD": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "registration-service CPU above 85%",
+        "AlarmName": "licsys-registration-service-cpu",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "ClusterName",
+            "Value": {
+              "Ref": "ClusterEB0386A7",
+            },
+          },
+          {
+            "Name": "ServiceName",
+            "Value": {
+              "Fn::GetAtt": [
+                "RegistrationService47E2FE6F",
+                "Name",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "CPUUtilization",
+        "Namespace": "AWS/ECS",
+        "Period": 300,
+        "Statistic": "Average",
+        "Threshold": 85,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alarmregistrationserviceunhealthy908F34EC": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "AlarmTopicD01E77F9",
+          },
+        ],
+        "AlarmDescription": "registration-service has unhealthy targets",
+        "AlarmName": "licsys-registration-service-unhealthy",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "LoadBalancer",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      1,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      2,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          "/",
+                          {
+                            "Ref": "AlbHttp7966E42E",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          {
+            "Name": "TargetGroup",
+            "Value": {
+              "Fn::GetAtt": [
+                "AlbHttpRegistrationTargetsGroup2E796A7B",
+                "TargetGroupFullName",
+              ],
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "UnHealthyHostCount",
+        "Namespace": "AWS/ApplicationELB",
+        "Period": 60,
+        "Statistic": "Maximum",
+        "Threshold": 1,
+        "TreatMissingData": "notBreaching",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "Alb16C2F182": {
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Key": "deletion_protection.enabled",
+            "Value": "false",
+          },
+          {
+            "Key": "routing.http.drop_invalid_header_fields.enabled",
+            "Value": "true",
+          },
+        ],
+        "Scheme": "internal",
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "AlbSg1155C1BE",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": [
+          {
+            "Ref": "VpcappSubnet1SubnetAE489B2F",
+          },
+          {
+            "Ref": "VpcappSubnet2Subnet2449FB56",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "AlbHttp7966E42E": {
+      "Properties": {
+        "DefaultActions": [
+          {
+            "FixedResponseConfig": {
+              "ContentType": "application/json",
+              "MessageBody": "{"error":"not found"}",
+              "StatusCode": "404",
+            },
+            "Type": "fixed-response",
+          },
+        ],
+        "LoadBalancerArn": {
+          "Ref": "Alb16C2F182",
+        },
+        "Port": 80,
+        "Protocol": "HTTP",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "AlbHttpDemeritTargetsGroup2C9C4DFF": {
+      "Properties": {
+        "HealthCheckPath": "/actuator/health",
+        "Matcher": {
+          "HttpCode": "200",
+        },
+        "Port": 8082,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "AlbHttpDemeritTargetsRuleB1B152F9": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "AlbHttpDemeritTargetsGroup2C9C4DFF",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "path-pattern",
+            "PathPatternConfig": {
+              "Values": [
+                "/api/drivers/*/demerits",
+                "/api/offences",
+                "/api/offences/*",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "AlbHttp7966E42E",
+        },
+        "Priority": 10,
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "AlbHttpLicenceTargetsGroup6D5C0867": {
+      "Properties": {
+        "HealthCheckPath": "/actuator/health",
+        "Matcher": {
+          "HttpCode": "200",
+        },
+        "Port": 8081,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "AlbHttpLicenceTargetsRule18C083BF": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "AlbHttpLicenceTargetsGroup6D5C0867",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "path-pattern",
+            "PathPatternConfig": {
+              "Values": [
+                "/api/drivers",
+                "/api/drivers/*",
+                "/api/progression/*",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "AlbHttp7966E42E",
+        },
+        "Priority": 20,
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "AlbHttpNotificationTargetsGroupDB6286A1": {
+      "Properties": {
+        "HealthCheckPath": "/actuator/health",
+        "Matcher": {
+          "HttpCode": "200",
+        },
+        "Port": 8084,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "AlbHttpNotificationTargetsRuleC63560D8": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "AlbHttpNotificationTargetsGroupDB6286A1",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "path-pattern",
+            "PathPatternConfig": {
+              "Values": [
+                "/api/notices",
+                "/api/notices/*",
+                "/api/activity",
+                "/api/activity/*",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "AlbHttp7966E42E",
+        },
+        "Priority": 40,
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "AlbHttpRegistrationTargetsGroup2E796A7B": {
+      "Properties": {
+        "HealthCheckPath": "/actuator/health",
+        "Matcher": {
+          "HttpCode": "200",
+        },
+        "Port": 8083,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "deregistration_delay.timeout_seconds",
+            "Value": "30",
+          },
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "AlbHttpRegistrationTargetsRule9D29D212": {
+      "Properties": {
+        "Actions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "AlbHttpRegistrationTargetsGroup2E796A7B",
+            },
+            "Type": "forward",
+          },
+        ],
+        "Conditions": [
+          {
+            "Field": "path-pattern",
+            "PathPatternConfig": {
+              "Values": [
+                "/api/renewals",
+                "/api/renewals/*",
+              ],
+            },
+          },
+        ],
+        "ListenerArn": {
+          "Ref": "AlbHttp7966E42E",
+        },
+        "Priority": 30,
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    },
+    "AlbSg1155C1BE": {
+      "Properties": {
+        "GroupDescription": "LICSYS internal ALB",
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "AlbSgfromLicsysNextProgressionTriggerSg99E60BE0804A9337A1": {
+      "Properties": {
+        "Description": "nightly progression trigger",
+        "FromPort": 80,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "ProgressionTriggerSgE0ACD608",
+            "GroupId",
+          ],
+        },
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "AlbSgfromLicsysNextVpcLinkSgFABD4A95809F0DAC2A": {
+      "Properties": {
+        "Description": "API Gateway VPC link",
+        "FromPort": 80,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "VpcLinkSg21D76F2D",
+            "GroupId",
+          ],
+        },
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "AlbSgtoLicsysNextDemeritSg1F2021248082614333E9": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "DemeritSg4EFB3FF5",
+            "GroupId",
+          ],
+        },
+        "FromPort": 8082,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 8082,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "AlbSgtoLicsysNextLicenceSg9674AB4680815C1F3AC1": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LicenceSg7DEE799E",
+            "GroupId",
+          ],
+        },
+        "FromPort": 8081,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 8081,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "AlbSgtoLicsysNextNotificationSgF55791F380841620984F": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "NotificationSg6A53BA70",
+            "GroupId",
+          ],
+        },
+        "FromPort": 8084,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 8084,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "AlbSgtoLicsysNextRegistrationSg97D57E758083374E2049": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "RegistrationSgAB70F11B",
+            "GroupId",
+          ],
+        },
+        "FromPort": 8083,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 8083,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "BusBusArchive8D838428": {
+      "Properties": {
+        "ArchiveName": "licsys-bus-archive",
+        "Description": {
+          "Fn::Join": [
+            "",
+            [
+              "Event Archive for ",
+              {
+                "Ref": "BusEA82B648",
+              },
+              " Event Bus",
+            ],
+          ],
+        },
+        "EventPattern": {
+          "source": [
+            {
+              "prefix": "licsys.",
+            },
+          ],
+        },
+        "RetentionDays": 30,
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "BusEA82B648",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::Events::Archive",
+    },
+    "BusDeliveryDlq9197407C": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "licsys-bus-delivery-dlq",
+        "SqsManagedSseEnabled": true,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "BusDeliveryDlqPolicy44132480": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::GetAtt": [
+                      "tolicenceinbox2814C690",
+                      "Arn",
+                    ],
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "Arn",
+                ],
+              },
+              "Sid": "AllowEventRuleLicsysNexttolicenceinbox48F3F1A9",
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::GetAtt": [
+                      "todemeritinbox79852059",
+                      "Arn",
+                    ],
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "Arn",
+                ],
+              },
+              "Sid": "AllowEventRuleLicsysNexttodemeritinbox81F2E826",
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::GetAtt": [
+                      "tonotificationinbox09043022",
+                      "Arn",
+                    ],
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "Arn",
+                ],
+              },
+              "Sid": "AllowEventRuleLicsysNexttonotificationinbox770ED63A",
+            },
+            {
+              "Action": "sqs:SendMessage",
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::GetAtt": [
+                      "toactivityinbox956018AE",
+                      "Arn",
+                    ],
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "Arn",
+                ],
+              },
+              "Sid": "AllowEventRuleLicsysNexttoactivityinboxB724F377",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "BusDeliveryDlq9197407C",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "BusEA82B648": {
+      "Properties": {
+        "Name": "licsys-bus",
+      },
+      "Type": "AWS::Events::EventBus",
+    },
+    "ClusterEB0386A7": {
+      "Properties": {
+        "ClusterName": "licsys",
+        "ClusterSettings": [
+          {
+            "Name": "containerInsights",
+            "Value": "enabled",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::Cluster",
+    },
+    "Dashboard9E4231ED": {
+      "Properties": {
+        "DashboardBody": {
+          "Fn::Join": [
+            "",
+            [
+              "{"widgets":[{"type":"text","width":24,"height":2,"x":0,"y":0,"properties":{"markdown":"# LICSYS Next\\nServices, event flow and the nightly progression run (was LICNIGHT)."}},{"type":"metric","width":8,"height":6,"x":0,"y":2,"properties":{"view":"timeSeries","title":"licence-service CPU / memory","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ECS","CPUUtilization","ClusterName","",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "","ServiceName","",
+              {
+                "Fn::GetAtt": [
+                  "LicenceServiceDA0FCD48",
+                  "Name",
+                ],
+              },
+              ""],["AWS/ECS","MemoryUtilization","ClusterName","",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "","ServiceName","",
+              {
+                "Fn::GetAtt": [
+                  "LicenceServiceDA0FCD48",
+                  "Name",
+                ],
+              },
+              ""]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":8,"y":2,"properties":{"view":"timeSeries","title":"licence-service 5xx","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ApplicationELB","HTTPCode_Target_5XX_Count","LoadBalancer","",
+              {
+                "Fn::Select": [
+                  1,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  2,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  3,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "","TargetGroup","",
+              {
+                "Fn::GetAtt": [
+                  "AlbHttpLicenceTargetsGroup6D5C0867",
+                  "TargetGroupFullName",
+                ],
+              },
+              "",{"stat":"Sum"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":16,"y":2,"properties":{"view":"timeSeries","title":"licence-service p95 latency","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ApplicationELB","TargetResponseTime","LoadBalancer","",
+              {
+                "Fn::Select": [
+                  1,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  2,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  3,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "","TargetGroup","",
+              {
+                "Fn::GetAtt": [
+                  "AlbHttpLicenceTargetsGroup6D5C0867",
+                  "TargetGroupFullName",
+                ],
+              },
+              "",{"stat":"p95"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":0,"y":8,"properties":{"view":"timeSeries","title":"demerit-service CPU / memory","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ECS","CPUUtilization","ClusterName","",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "","ServiceName","",
+              {
+                "Fn::GetAtt": [
+                  "DemeritServiceC150C664",
+                  "Name",
+                ],
+              },
+              ""],["AWS/ECS","MemoryUtilization","ClusterName","",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "","ServiceName","",
+              {
+                "Fn::GetAtt": [
+                  "DemeritServiceC150C664",
+                  "Name",
+                ],
+              },
+              ""]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":8,"y":8,"properties":{"view":"timeSeries","title":"demerit-service 5xx","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ApplicationELB","HTTPCode_Target_5XX_Count","LoadBalancer","",
+              {
+                "Fn::Select": [
+                  1,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  2,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  3,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "","TargetGroup","",
+              {
+                "Fn::GetAtt": [
+                  "AlbHttpDemeritTargetsGroup2C9C4DFF",
+                  "TargetGroupFullName",
+                ],
+              },
+              "",{"stat":"Sum"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":16,"y":8,"properties":{"view":"timeSeries","title":"demerit-service p95 latency","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ApplicationELB","TargetResponseTime","LoadBalancer","",
+              {
+                "Fn::Select": [
+                  1,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  2,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  3,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "","TargetGroup","",
+              {
+                "Fn::GetAtt": [
+                  "AlbHttpDemeritTargetsGroup2C9C4DFF",
+                  "TargetGroupFullName",
+                ],
+              },
+              "",{"stat":"p95"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":0,"y":14,"properties":{"view":"timeSeries","title":"registration-service CPU / memory","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ECS","CPUUtilization","ClusterName","",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "","ServiceName","",
+              {
+                "Fn::GetAtt": [
+                  "RegistrationService47E2FE6F",
+                  "Name",
+                ],
+              },
+              ""],["AWS/ECS","MemoryUtilization","ClusterName","",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "","ServiceName","",
+              {
+                "Fn::GetAtt": [
+                  "RegistrationService47E2FE6F",
+                  "Name",
+                ],
+              },
+              ""]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":8,"y":14,"properties":{"view":"timeSeries","title":"registration-service 5xx","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ApplicationELB","HTTPCode_Target_5XX_Count","LoadBalancer","",
+              {
+                "Fn::Select": [
+                  1,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  2,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  3,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "","TargetGroup","",
+              {
+                "Fn::GetAtt": [
+                  "AlbHttpRegistrationTargetsGroup2E796A7B",
+                  "TargetGroupFullName",
+                ],
+              },
+              "",{"stat":"Sum"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":16,"y":14,"properties":{"view":"timeSeries","title":"registration-service p95 latency","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ApplicationELB","TargetResponseTime","LoadBalancer","",
+              {
+                "Fn::Select": [
+                  1,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  2,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  3,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "","TargetGroup","",
+              {
+                "Fn::GetAtt": [
+                  "AlbHttpRegistrationTargetsGroup2E796A7B",
+                  "TargetGroupFullName",
+                ],
+              },
+              "",{"stat":"p95"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":0,"y":20,"properties":{"view":"timeSeries","title":"notification-service CPU / memory","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ECS","CPUUtilization","ClusterName","",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "","ServiceName","",
+              {
+                "Fn::GetAtt": [
+                  "NotificationService2154020D",
+                  "Name",
+                ],
+              },
+              ""],["AWS/ECS","MemoryUtilization","ClusterName","",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "","ServiceName","",
+              {
+                "Fn::GetAtt": [
+                  "NotificationService2154020D",
+                  "Name",
+                ],
+              },
+              ""]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":8,"y":20,"properties":{"view":"timeSeries","title":"notification-service 5xx","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ApplicationELB","HTTPCode_Target_5XX_Count","LoadBalancer","",
+              {
+                "Fn::Select": [
+                  1,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  2,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  3,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "","TargetGroup","",
+              {
+                "Fn::GetAtt": [
+                  "AlbHttpNotificationTargetsGroupDB6286A1",
+                  "TargetGroupFullName",
+                ],
+              },
+              "",{"stat":"Sum"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":16,"y":20,"properties":{"view":"timeSeries","title":"notification-service p95 latency","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ApplicationELB","TargetResponseTime","LoadBalancer","",
+              {
+                "Fn::Select": [
+                  1,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  2,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "/",
+              {
+                "Fn::Select": [
+                  3,
+                  {
+                    "Fn::Split": [
+                      "/",
+                      {
+                        "Ref": "AlbHttp7966E42E",
+                      },
+                    ],
+                  },
+                ],
+              },
+              "","TargetGroup","",
+              {
+                "Fn::GetAtt": [
+                  "AlbHttpNotificationTargetsGroupDB6286A1",
+                  "TargetGroupFullName",
+                ],
+              },
+              "",{"stat":"p95"}]],"yAxis":{}}},{"type":"metric","width":6,"height":6,"x":0,"y":26,"properties":{"view":"timeSeries","title":"licence-inbox","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "licenceinboxDCCE0223",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}],["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "licenceinboxdlq948D5FA5",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}],["AWS/SQS","ApproximateAgeOfOldestMessage","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "licenceinboxDCCE0223",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum","yAxis":"right"}]],"yAxis":{}}},{"type":"metric","width":6,"height":6,"x":6,"y":26,"properties":{"view":"timeSeries","title":"demerit-inbox","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "demeritinboxA4936D57",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}],["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "demeritinboxdlqCD7CDEBD",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}],["AWS/SQS","ApproximateAgeOfOldestMessage","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "demeritinboxA4936D57",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum","yAxis":"right"}]],"yAxis":{}}},{"type":"metric","width":6,"height":6,"x":12,"y":26,"properties":{"view":"timeSeries","title":"notification-inbox","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "notificationinbox20AF2040",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}],["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "notificationinboxdlq9913724F",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}],["AWS/SQS","ApproximateAgeOfOldestMessage","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "notificationinbox20AF2040",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum","yAxis":"right"}]],"yAxis":{}}},{"type":"metric","width":6,"height":6,"x":18,"y":26,"properties":{"view":"timeSeries","title":"activity-inbox","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "activityinbox150A4EE0",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}],["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "activityinboxdlq79E63AC3",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}],["AWS/SQS","ApproximateAgeOfOldestMessage","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "activityinbox150A4EE0",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum","yAxis":"right"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":0,"y":32,"properties":{"view":"timeSeries","title":"Nightly progression trigger","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/Lambda","Errors","FunctionName","",
+              {
+                "Ref": "ProgressionTrigger70A7ECB7",
+              },
+              "",{"period":3600,"stat":"Sum"}],["AWS/Lambda","Invocations","FunctionName","",
+              {
+                "Ref": "ProgressionTrigger70A7ECB7",
+              },
+              "",{"period":3600,"stat":"Sum"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":8,"y":32,"properties":{"view":"timeSeries","title":"Bus delivery + schedule DLQs","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}],["AWS/SQS","ApproximateNumberOfMessagesVisible","QueueName","",
+              {
+                "Fn::GetAtt": [
+                  "ScheduleDlqBC80447A",
+                  "QueueName",
+                ],
+              },
+              "",{"stat":"Maximum"}]],"yAxis":{}}},{"type":"metric","width":8,"height":6,"x":16,"y":32,"properties":{"view":"timeSeries","title":"HTTP API 5xx","region":"",
+              {
+                "Ref": "AWS::Region",
+              },
+              "","metrics":[["AWS/ApiGateway","5xx","ApiId","",
+              {
+                "Ref": "HttpApiF5A9A8A7",
+              },
+              "","Stage","$default",{"stat":"Sum"}]],"yAxis":{}}}]}",
+            ],
+          ],
+        },
+        "DashboardName": "licsys-next",
+      },
+      "Type": "AWS::CloudWatch::Dashboard",
+    },
+    "DemeritLogsB342C126": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "LogGroupName": "/licsys/demerit-service",
+        "RetentionInDays": 90,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "DemeritRepoA26E80C8": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "ImageScanningConfiguration": {
+          "ScanOnPush": true,
+        },
+        "ImageTagMutability": "IMMUTABLE",
+        "RepositoryName": "licsys/demerit-service",
+      },
+      "Type": "AWS::ECR::Repository",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "DemeritServiceC150C664": {
+      "DependsOn": [
+        "AlbHttpDemeritTargetsRuleB1B152F9",
+        "DemeritTaskRoleDefaultPolicy31AA8DD9",
+        "DemeritTaskRoleDA141A25",
+      ],
+      "Properties": {
+        "Cluster": {
+          "Ref": "ClusterEB0386A7",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "DesiredCount": 2,
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "demerit-service",
+            "ContainerPort": 8082,
+            "TargetGroupArn": {
+              "Ref": "AlbHttpDemeritTargetsGroup2C9C4DFF",
+            },
+          },
+        ],
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "DemeritSg4EFB3FF5",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": [
+              {
+                "Ref": "VpcappSubnet1SubnetAE489B2F",
+              },
+              {
+                "Ref": "VpcappSubnet2Subnet2449FB56",
+              },
+            ],
+          },
+        },
+        "ServiceName": "demerit-service",
+        "TaskDefinition": {
+          "Ref": "DemeritTaskDef3F89528C",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "DemeritServiceTaskCountTarget6CD584BC": {
+      "DependsOn": [
+        "DemeritTaskRoleDefaultPolicy31AA8DD9",
+        "DemeritTaskRoleDA141A25",
+      ],
+      "Properties": {
+        "MaxCapacity": 6,
+        "MinCapacity": 2,
+        "ResourceId": {
+          "Fn::Join": [
+            "",
+            [
+              "service/",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "/",
+              {
+                "Fn::GetAtt": [
+                  "DemeritServiceC150C664",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "DemeritServiceTaskCountTargetCpuB4E11CEE": {
+      "DependsOn": [
+        "DemeritTaskRoleDefaultPolicy31AA8DD9",
+        "DemeritTaskRoleDA141A25",
+      ],
+      "Properties": {
+        "PolicyName": "LicsysNextDemeritServiceTaskCountTargetCpu34A4D548",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "DemeritServiceTaskCountTarget6CD584BC",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilization",
+          },
+          "TargetValue": 60,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "DemeritSg4EFB3FF5": {
+      "Properties": {
+        "GroupDescription": "demerit-service tasks",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "DemeritSgfromLicsysNextAlbSg105168E58082FC3060F9": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 8082,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "DemeritSg4EFB3FF5",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "ToPort": 8082,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "DemeritTableE94B9EE0": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "driverId",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": [
+          {
+            "AttributeName": "driverId",
+            "KeyType": "HASH",
+          },
+        ],
+        "PointInTimeRecoverySpecification": {
+          "PointInTimeRecoveryEnabled": true,
+        },
+        "SSESpecification": {
+          "SSEEnabled": true,
+        },
+        "TableName": "demerit-ledger",
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "DemeritTaskDef3F89528C": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "SERVER_PORT",
+                "Value": "8082",
+              },
+              {
+                "Name": "LICSYS_TABLE",
+                "Value": "demerit-ledger",
+              },
+              {
+                "Name": "LICSYS_EVENT_BUS",
+                "Value": "licsys-bus",
+              },
+              {
+                "Name": "LICSYS_EVENT_SOURCE",
+                "Value": "licsys.demerit",
+              },
+              {
+                "Name": "SPRING_PROFILES_ACTIVE",
+                "Value": "aws",
+              },
+              {
+                "Name": "LICSYS_QUEUE_DEMERIT_INBOX",
+                "Value": {
+                  "Ref": "demeritinboxA4936D57",
+                },
+              },
+            ],
+            "Essential": true,
+            "HealthCheck": {
+              "Command": [
+                "CMD-SHELL",
+                "curl -fs http://localhost:8082/actuator/health || exit 1",
+              ],
+              "Interval": 30,
+              "Retries": 3,
+              "StartPeriod": 60,
+              "Timeout": 5,
+            },
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      4,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "DemeritRepoA26E80C8",
+                              "Arn",
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".dkr.ecr.",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "DemeritRepoA26E80C8",
+                              "Arn",
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/",
+                  {
+                    "Ref": "DemeritRepoA26E80C8",
+                  },
+                  ":test",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "DemeritLogsB342C126",
+                },
+                "awslogs-region": "ap-southeast-2",
+                "awslogs-stream-prefix": "demerit-service",
+              },
+            },
+            "Name": "demerit-service",
+            "PortMappings": [
+              {
+                "ContainerPort": 8082,
+                "Protocol": "tcp",
+              },
+            ],
+          },
+        ],
+        "Cpu": "512",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "DemeritTaskDefExecutionRole5358EC6A",
+            "Arn",
+          ],
+        },
+        "Family": "demerit-service",
+        "Memory": "1024",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "X86_64",
+          "OperatingSystemFamily": "LINUX",
+        },
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "DemeritTaskRoleDA141A25",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "DemeritTaskDefExecutionRole5358EC6A": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "DemeritTaskDefExecutionRoleDefaultPolicy7705C482": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "DemeritRepoA26E80C8",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "DemeritLogsB342C126",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "DemeritTaskDefExecutionRoleDefaultPolicy7705C482",
+        "Roles": [
+          {
+            "Ref": "DemeritTaskDefExecutionRole5358EC6A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "DemeritTaskRoleDA141A25": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "demerit-service task role (least privilege)",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "DemeritTaskRoleDefaultPolicy31AA8DD9": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "DemeritTableE94B9EE0",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+            {
+              "Action": "events:PutEvents",
+              "Condition": {
+                "StringEquals": {
+                  "events:source": "licsys.demerit",
+                },
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BusEA82B648",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:ChangeMessageVisibility",
+                "sqs:GetQueueUrl",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "demeritinboxA4936D57",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "DemeritTaskRoleDefaultPolicy31AA8DD9",
+        "Roles": [
+          {
+            "Ref": "DemeritTaskRoleDA141A25",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "HttpApiCognitoAuthorizer935FA0F6": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizerType": "JWT",
+        "IdentitySource": [
+          "$request.header.Authorization",
+        ],
+        "JwtConfiguration": {
+          "Audience": [
+            {
+              "Ref": "UserPoolUiClient88FBD82C",
+            },
+          ],
+          "Issuer": {
+            "Fn::Join": [
+              "",
+              [
+                "https://cognito-idp.ap-southeast-2.amazonaws.com/",
+                {
+                  "Ref": "UserPool6BA7E5F2",
+                },
+              ],
+            ],
+          },
+        },
+        "Name": "CognitoAuthorizer",
+      },
+      "Type": "AWS::ApiGatewayV2::Authorizer",
+    },
+    "HttpApiDefaultStage3EEB07D6": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AutoDeploy": true,
+        "StageName": "$default",
+      },
+      "Type": "AWS::ApiGatewayV2::Stage",
+    },
+    "HttpApiF5A9A8A7": {
+      "Properties": {
+        "CorsConfiguration": {
+          "AllowHeaders": [
+            "authorization",
+            "content-type",
+          ],
+          "AllowMethods": [
+            "*",
+          ],
+          "AllowOrigins": [
+            "https://licsys-next.example.invalid",
+          ],
+        },
+        "Name": "licsys-next",
+        "ProtocolType": "HTTP",
+      },
+      "Type": "AWS::ApiGatewayV2::Api",
+    },
+    "HttpApiGETapiactivity79923558": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/activity",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapiactivityproxy350B6681": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/activity/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapidrivers59AA13C8": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/drivers",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapidriversAlbIntegration3427BF3C": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "ConnectionId": {
+          "Ref": "VpcLink42ED6FF0",
+        },
+        "ConnectionType": "VPC_LINK",
+        "IntegrationMethod": "ANY",
+        "IntegrationType": "HTTP_PROXY",
+        "IntegrationUri": {
+          "Ref": "AlbHttp7966E42E",
+        },
+        "PayloadFormatVersion": "1.0",
+      },
+      "Type": "AWS::ApiGatewayV2::Integration",
+    },
+    "HttpApiGETapidriversproxyC723AE96": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/drivers/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapinoticesF2187885": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/notices",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapinoticesproxy3EBDF361": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/notices/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapioffences6157681F": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/offences",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapioffencesproxy53BFD51E": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/offences/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapiprogressionproxy6ED54204": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/progression/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapirenewalsB1657C66": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/renewals",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiGETapirenewalsproxyBCB4A127": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "GET /api/renewals/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapiactivityA725D18F": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/activity",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapiactivityproxyF3B0C229": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/activity/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapidrivers2A1C6999": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/drivers",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapidriversproxy07C68F64": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/drivers/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapinotices64FD3924": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/notices",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapinoticesproxy361267CB": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/notices/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapioffences1340075A": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/offences",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapioffencesproxy699C9994": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/offences/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapiprogressionproxyAAA3CD14": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/progression/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapirenewalsAE272867": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/renewals",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "HttpApiPOSTapirenewalsproxy7B61BEFF": {
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApiF5A9A8A7",
+        },
+        "AuthorizationType": "JWT",
+        "AuthorizerId": {
+          "Ref": "HttpApiCognitoAuthorizer935FA0F6",
+        },
+        "RouteKey": "POST /api/renewals/{proxy+}",
+        "Target": {
+          "Fn::Join": [
+            "",
+            [
+              "integrations/",
+              {
+                "Ref": "HttpApiGETapidriversAlbIntegration3427BF3C",
+              },
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::ApiGatewayV2::Route",
+    },
+    "LicenceLogs6610F146": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "LogGroupName": "/licsys/licence-service",
+        "RetentionInDays": 90,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "LicenceRepoE9F6B48D": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "ImageScanningConfiguration": {
+          "ScanOnPush": true,
+        },
+        "ImageTagMutability": "IMMUTABLE",
+        "RepositoryName": "licsys/licence-service",
+      },
+      "Type": "AWS::ECR::Repository",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "LicenceServiceDA0FCD48": {
+      "DependsOn": [
+        "AlbHttpLicenceTargetsRule18C083BF",
+        "LicenceTaskRoleDefaultPolicyABD1B87F",
+        "LicenceTaskRoleEE573DA9",
+      ],
+      "Properties": {
+        "Cluster": {
+          "Ref": "ClusterEB0386A7",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "DesiredCount": 2,
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "licence-service",
+            "ContainerPort": 8081,
+            "TargetGroupArn": {
+              "Ref": "AlbHttpLicenceTargetsGroup6D5C0867",
+            },
+          },
+        ],
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "LicenceSg7DEE799E",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": [
+              {
+                "Ref": "VpcappSubnet1SubnetAE489B2F",
+              },
+              {
+                "Ref": "VpcappSubnet2Subnet2449FB56",
+              },
+            ],
+          },
+        },
+        "ServiceName": "licence-service",
+        "TaskDefinition": {
+          "Ref": "LicenceTaskDef7E931167",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "LicenceServiceTaskCountTargetCpu0BA2393F": {
+      "DependsOn": [
+        "LicenceTaskRoleDefaultPolicyABD1B87F",
+        "LicenceTaskRoleEE573DA9",
+      ],
+      "Properties": {
+        "PolicyName": "LicsysNextLicenceServiceTaskCountTargetCpu20AAC5FC",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "LicenceServiceTaskCountTargetED69742A",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilization",
+          },
+          "TargetValue": 60,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "LicenceServiceTaskCountTargetED69742A": {
+      "DependsOn": [
+        "LicenceTaskRoleDefaultPolicyABD1B87F",
+        "LicenceTaskRoleEE573DA9",
+      ],
+      "Properties": {
+        "MaxCapacity": 6,
+        "MinCapacity": 2,
+        "ResourceId": {
+          "Fn::Join": [
+            "",
+            [
+              "service/",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "/",
+              {
+                "Fn::GetAtt": [
+                  "LicenceServiceDA0FCD48",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "LicenceSg7DEE799E": {
+      "Properties": {
+        "GroupDescription": "licence-service tasks",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "LicenceSgfromLicsysNextAlbSg105168E580812C2AC990": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 8081,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LicenceSg7DEE799E",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "ToPort": 8081,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "LicenceTable8CD2D7D3": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "driverId",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": [
+          {
+            "AttributeName": "driverId",
+            "KeyType": "HASH",
+          },
+        ],
+        "PointInTimeRecoverySpecification": {
+          "PointInTimeRecoveryEnabled": true,
+        },
+        "SSESpecification": {
+          "SSEEnabled": true,
+        },
+        "TableName": "licence-drivers",
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "LicenceTaskDef7E931167": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "SERVER_PORT",
+                "Value": "8081",
+              },
+              {
+                "Name": "LICSYS_TABLE",
+                "Value": "licence-drivers",
+              },
+              {
+                "Name": "LICSYS_EVENT_BUS",
+                "Value": "licsys-bus",
+              },
+              {
+                "Name": "LICSYS_EVENT_SOURCE",
+                "Value": "licsys.licence",
+              },
+              {
+                "Name": "SPRING_PROFILES_ACTIVE",
+                "Value": "aws",
+              },
+              {
+                "Name": "LICSYS_QUEUE_LICENCE_INBOX",
+                "Value": {
+                  "Ref": "licenceinboxDCCE0223",
+                },
+              },
+            ],
+            "Essential": true,
+            "HealthCheck": {
+              "Command": [
+                "CMD-SHELL",
+                "curl -fs http://localhost:8081/actuator/health || exit 1",
+              ],
+              "Interval": 30,
+              "Retries": 3,
+              "StartPeriod": 60,
+              "Timeout": 5,
+            },
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      4,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "LicenceRepoE9F6B48D",
+                              "Arn",
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".dkr.ecr.",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "LicenceRepoE9F6B48D",
+                              "Arn",
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/",
+                  {
+                    "Ref": "LicenceRepoE9F6B48D",
+                  },
+                  ":test",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "LicenceLogs6610F146",
+                },
+                "awslogs-region": "ap-southeast-2",
+                "awslogs-stream-prefix": "licence-service",
+              },
+            },
+            "Name": "licence-service",
+            "PortMappings": [
+              {
+                "ContainerPort": 8081,
+                "Protocol": "tcp",
+              },
+            ],
+          },
+        ],
+        "Cpu": "512",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "LicenceTaskDefExecutionRole779AA8CA",
+            "Arn",
+          ],
+        },
+        "Family": "licence-service",
+        "Memory": "1024",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "X86_64",
+          "OperatingSystemFamily": "LINUX",
+        },
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "LicenceTaskRoleEE573DA9",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "LicenceTaskDefExecutionRole779AA8CA": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "LicenceTaskDefExecutionRoleDefaultPolicyBF82BB8E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "LicenceRepoE9F6B48D",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "LicenceLogs6610F146",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "LicenceTaskDefExecutionRoleDefaultPolicyBF82BB8E",
+        "Roles": [
+          {
+            "Ref": "LicenceTaskDefExecutionRole779AA8CA",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "LicenceTaskRoleDefaultPolicyABD1B87F": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "LicenceTable8CD2D7D3",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+            {
+              "Action": "events:PutEvents",
+              "Condition": {
+                "StringEquals": {
+                  "events:source": "licsys.licence",
+                },
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BusEA82B648",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:ChangeMessageVisibility",
+                "sqs:GetQueueUrl",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "licenceinboxDCCE0223",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "LicenceTaskRoleDefaultPolicyABD1B87F",
+        "Roles": [
+          {
+            "Ref": "LicenceTaskRoleEE573DA9",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "LicenceTaskRoleEE573DA9": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "licence-service task role (least privilege)",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "NightlyProgression": {
+      "Properties": {
+        "Description": "Nightly licence progression sweep (was jcl/LICNIGHT.jcl STEP020 LICUPG)",
+        "FlexibleTimeWindow": {
+          "Mode": "OFF",
+        },
+        "Name": "licsys-nightly-progression",
+        "ScheduleExpression": "cron(0 2 * * ? *)",
+        "ScheduleExpressionTimezone": "Australia/Sydney",
+        "Target": {
+          "Arn": {
+            "Fn::GetAtt": [
+              "ProgressionTrigger70A7ECB7",
+              "Arn",
+            ],
+          },
+          "DeadLetterConfig": {
+            "Arn": {
+              "Fn::GetAtt": [
+                "ScheduleDlqBC80447A",
+                "Arn",
+              ],
+            },
+          },
+          "Input": "{"source":"licsys-nightly-progression"}",
+          "RetryPolicy": {
+            "MaximumEventAgeInSeconds": 3600,
+            "MaximumRetryAttempts": 3,
+          },
+          "RoleArn": {
+            "Fn::GetAtt": [
+              "SchedulerRole59E73443",
+              "Arn",
+            ],
+          },
+        },
+      },
+      "Type": "AWS::Scheduler::Schedule",
+    },
+    "NotificationLogs7DD8E52F": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "LogGroupName": "/licsys/notification-service",
+        "RetentionInDays": 90,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "NotificationRepo6E06F044": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "ImageScanningConfiguration": {
+          "ScanOnPush": true,
+        },
+        "ImageTagMutability": "IMMUTABLE",
+        "RepositoryName": "licsys/notification-service",
+      },
+      "Type": "AWS::ECR::Repository",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "NotificationService2154020D": {
+      "DependsOn": [
+        "AlbHttpNotificationTargetsRuleC63560D8",
+        "NotificationTaskRoleDefaultPolicyA8E13E24",
+        "NotificationTaskRoleEFA49989",
+      ],
+      "Properties": {
+        "Cluster": {
+          "Ref": "ClusterEB0386A7",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "DesiredCount": 2,
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "notification-service",
+            "ContainerPort": 8084,
+            "TargetGroupArn": {
+              "Ref": "AlbHttpNotificationTargetsGroupDB6286A1",
+            },
+          },
+        ],
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "NotificationSg6A53BA70",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": [
+              {
+                "Ref": "VpcappSubnet1SubnetAE489B2F",
+              },
+              {
+                "Ref": "VpcappSubnet2Subnet2449FB56",
+              },
+            ],
+          },
+        },
+        "ServiceName": "notification-service",
+        "TaskDefinition": {
+          "Ref": "NotificationTaskDef7C2BF3C6",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "NotificationServiceTaskCountTarget7398FD9E": {
+      "DependsOn": [
+        "NotificationTaskRoleDefaultPolicyA8E13E24",
+        "NotificationTaskRoleEFA49989",
+      ],
+      "Properties": {
+        "MaxCapacity": 6,
+        "MinCapacity": 2,
+        "ResourceId": {
+          "Fn::Join": [
+            "",
+            [
+              "service/",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "/",
+              {
+                "Fn::GetAtt": [
+                  "NotificationService2154020D",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "NotificationServiceTaskCountTargetCpu674A70C8": {
+      "DependsOn": [
+        "NotificationTaskRoleDefaultPolicyA8E13E24",
+        "NotificationTaskRoleEFA49989",
+      ],
+      "Properties": {
+        "PolicyName": "LicsysNextNotificationServiceTaskCountTargetCpuE24EFD1E",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "NotificationServiceTaskCountTarget7398FD9E",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilization",
+          },
+          "TargetValue": 60,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "NotificationSg6A53BA70": {
+      "Properties": {
+        "GroupDescription": "notification-service tasks",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "NotificationSgfromLicsysNextAlbSg105168E5808473C007D6": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 8084,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "NotificationSg6A53BA70",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "ToPort": 8084,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "NotificationTable89D5933F": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "eventId",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": [
+          {
+            "AttributeName": "eventId",
+            "KeyType": "HASH",
+          },
+        ],
+        "PointInTimeRecoverySpecification": {
+          "PointInTimeRecoveryEnabled": true,
+        },
+        "SSESpecification": {
+          "SSEEnabled": true,
+        },
+        "TableName": "notification-activity",
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "NotificationTaskDef7C2BF3C6": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "SERVER_PORT",
+                "Value": "8084",
+              },
+              {
+                "Name": "LICSYS_TABLE",
+                "Value": "notification-activity",
+              },
+              {
+                "Name": "LICSYS_EVENT_BUS",
+                "Value": "licsys-bus",
+              },
+              {
+                "Name": "LICSYS_EVENT_SOURCE",
+                "Value": "licsys.notification",
+              },
+              {
+                "Name": "SPRING_PROFILES_ACTIVE",
+                "Value": "aws",
+              },
+              {
+                "Name": "LICSYS_QUEUE_NOTIFICATION_INBOX",
+                "Value": {
+                  "Ref": "notificationinbox20AF2040",
+                },
+              },
+              {
+                "Name": "LICSYS_QUEUE_ACTIVITY_INBOX",
+                "Value": {
+                  "Ref": "activityinbox150A4EE0",
+                },
+              },
+            ],
+            "Essential": true,
+            "HealthCheck": {
+              "Command": [
+                "CMD-SHELL",
+                "curl -fs http://localhost:8084/actuator/health || exit 1",
+              ],
+              "Interval": 30,
+              "Retries": 3,
+              "StartPeriod": 60,
+              "Timeout": 5,
+            },
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      4,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "NotificationRepo6E06F044",
+                              "Arn",
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".dkr.ecr.",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "NotificationRepo6E06F044",
+                              "Arn",
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/",
+                  {
+                    "Ref": "NotificationRepo6E06F044",
+                  },
+                  ":test",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "NotificationLogs7DD8E52F",
+                },
+                "awslogs-region": "ap-southeast-2",
+                "awslogs-stream-prefix": "notification-service",
+              },
+            },
+            "Name": "notification-service",
+            "PortMappings": [
+              {
+                "ContainerPort": 8084,
+                "Protocol": "tcp",
+              },
+            ],
+          },
+        ],
+        "Cpu": "512",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "NotificationTaskDefExecutionRole04CEB468",
+            "Arn",
+          ],
+        },
+        "Family": "notification-service",
+        "Memory": "1024",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "X86_64",
+          "OperatingSystemFamily": "LINUX",
+        },
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "NotificationTaskRoleEFA49989",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "NotificationTaskDefExecutionRole04CEB468": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "NotificationTaskDefExecutionRoleDefaultPolicy1A8FDD0D": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "NotificationRepo6E06F044",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "NotificationLogs7DD8E52F",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "NotificationTaskDefExecutionRoleDefaultPolicy1A8FDD0D",
+        "Roles": [
+          {
+            "Ref": "NotificationTaskDefExecutionRole04CEB468",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "NotificationTaskRoleDefaultPolicyA8E13E24": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "NotificationTable89D5933F",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+            {
+              "Action": "events:PutEvents",
+              "Condition": {
+                "StringEquals": {
+                  "events:source": "licsys.notification",
+                },
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BusEA82B648",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:ChangeMessageVisibility",
+                "sqs:GetQueueUrl",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "notificationinbox20AF2040",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:ChangeMessageVisibility",
+                "sqs:GetQueueUrl",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "activityinbox150A4EE0",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "NotificationTaskRoleDefaultPolicyA8E13E24",
+        "Roles": [
+          {
+            "Ref": "NotificationTaskRoleEFA49989",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "NotificationTaskRoleEFA49989": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "notification-service task role (least privilege)",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ProgressionTrigger70A7ECB7": {
+      "DependsOn": [
+        "ProgressionTriggerServiceRole21E7D5FC",
+        "VpcappSubnet1DefaultRoute64294A8F",
+        "VpcappSubnet1RouteTableAssociation168BF781",
+        "VpcappSubnet2DefaultRouteEBCCC1EA",
+        "VpcappSubnet2RouteTableAssociation81E96A75",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-ap-southeast-2",
+          },
+          "S3Key": "572ee539e94880e079b5cd9478ac3dceb8adb056702917a6b8d81b17b3156a54.zip",
+        },
+        "Description": "Calls licence-service POST /api/progression/run (replaces LICNIGHT STEP020 LICUPG)",
+        "Environment": {
+          "Variables": {
+            "BASE_URL": {
+              "Fn::Join": [
+                "",
+                [
+                  "http://",
+                  {
+                    "Fn::GetAtt": [
+                      "Alb16C2F182",
+                      "DNSName",
+                    ],
+                  },
+                ],
+              ],
+            },
+            "RUN_PATH": "/api/progression/run",
+            "RUN_TIMEZONE": "Australia/Sydney",
+          },
+        },
+        "FunctionName": "licsys-progression-trigger",
+        "Handler": "index.handler",
+        "LoggingConfig": {
+          "LogGroup": {
+            "Ref": "ProgressionTriggerLogs36379CAA",
+          },
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "ProgressionTriggerServiceRole21E7D5FC",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs20.x",
+        "Timeout": 300,
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            {
+              "Fn::GetAtt": [
+                "ProgressionTriggerSgE0ACD608",
+                "GroupId",
+              ],
+            },
+          ],
+          "SubnetIds": [
+            {
+              "Ref": "VpcappSubnet1SubnetAE489B2F",
+            },
+            {
+              "Ref": "VpcappSubnet2Subnet2449FB56",
+            },
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "ProgressionTriggerLogs36379CAA": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "LogGroupName": "/licsys/progression-trigger",
+        "RetentionInDays": 365,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "ProgressionTriggerServiceRole21E7D5FC": {
+      "DependsOn": [
+        "VpcappSubnet1DefaultRoute64294A8F",
+        "VpcappSubnet1RouteTableAssociation168BF781",
+        "VpcappSubnet2DefaultRouteEBCCC1EA",
+        "VpcappSubnet2RouteTableAssociation81E96A75",
+      ],
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ProgressionTriggerSgE0ACD608": {
+      "Properties": {
+        "GroupDescription": "progression trigger lambda",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "RegistrationLogs15800631": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "LogGroupName": "/licsys/registration-service",
+        "RetentionInDays": 90,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "RegistrationRepo4F684F89": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "ImageScanningConfiguration": {
+          "ScanOnPush": true,
+        },
+        "ImageTagMutability": "IMMUTABLE",
+        "RepositoryName": "licsys/registration-service",
+      },
+      "Type": "AWS::ECR::Repository",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "RegistrationService47E2FE6F": {
+      "DependsOn": [
+        "AlbHttpRegistrationTargetsRule9D29D212",
+        "RegistrationTaskRoleDefaultPolicy2D14CD31",
+        "RegistrationTaskRole9BF0F390",
+      ],
+      "Properties": {
+        "Cluster": {
+          "Ref": "ClusterEB0386A7",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+        },
+        "DeploymentController": {
+          "Type": "ECS",
+        },
+        "DesiredCount": 2,
+        "EnableECSManagedTags": false,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "registration-service",
+            "ContainerPort": 8083,
+            "TargetGroupArn": {
+              "Ref": "AlbHttpRegistrationTargetsGroup2E796A7B",
+            },
+          },
+        ],
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "RegistrationSgAB70F11B",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": [
+              {
+                "Ref": "VpcappSubnet1SubnetAE489B2F",
+              },
+              {
+                "Ref": "VpcappSubnet2Subnet2449FB56",
+              },
+            ],
+          },
+        },
+        "ServiceName": "registration-service",
+        "TaskDefinition": {
+          "Ref": "RegistrationTaskDef6EC5FC44",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "RegistrationServiceTaskCountTarget8902DB93": {
+      "DependsOn": [
+        "RegistrationTaskRoleDefaultPolicy2D14CD31",
+        "RegistrationTaskRole9BF0F390",
+      ],
+      "Properties": {
+        "MaxCapacity": 6,
+        "MinCapacity": 2,
+        "ResourceId": {
+          "Fn::Join": [
+            "",
+            [
+              "service/",
+              {
+                "Ref": "ClusterEB0386A7",
+              },
+              "/",
+              {
+                "Fn::GetAtt": [
+                  "RegistrationService47E2FE6F",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "RegistrationServiceTaskCountTargetCpuEF3D832E": {
+      "DependsOn": [
+        "RegistrationTaskRoleDefaultPolicy2D14CD31",
+        "RegistrationTaskRole9BF0F390",
+      ],
+      "Properties": {
+        "PolicyName": "LicsysNextRegistrationServiceTaskCountTargetCpuC430AD99",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": {
+          "Ref": "RegistrationServiceTaskCountTarget8902DB93",
+        },
+        "TargetTrackingScalingPolicyConfiguration": {
+          "PredefinedMetricSpecification": {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilization",
+          },
+          "TargetValue": 60,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "RegistrationSgAB70F11B": {
+      "Properties": {
+        "GroupDescription": "registration-service tasks",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "RegistrationSgfromLicsysNextAlbSg105168E580835E37D25E": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 8083,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "RegistrationSgAB70F11B",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "AlbSg1155C1BE",
+            "GroupId",
+          ],
+        },
+        "ToPort": 8083,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "RegistrationTableEE324320": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "renewalId",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": [
+          {
+            "AttributeName": "renewalId",
+            "KeyType": "HASH",
+          },
+        ],
+        "PointInTimeRecoverySpecification": {
+          "PointInTimeRecoveryEnabled": true,
+        },
+        "SSESpecification": {
+          "SSEEnabled": true,
+        },
+        "TableName": "registration-renewals",
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "RegistrationTaskDef6EC5FC44": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "SERVER_PORT",
+                "Value": "8083",
+              },
+              {
+                "Name": "LICSYS_TABLE",
+                "Value": "registration-renewals",
+              },
+              {
+                "Name": "LICSYS_EVENT_BUS",
+                "Value": "licsys-bus",
+              },
+              {
+                "Name": "LICSYS_EVENT_SOURCE",
+                "Value": "licsys.registration",
+              },
+              {
+                "Name": "SPRING_PROFILES_ACTIVE",
+                "Value": "aws",
+              },
+            ],
+            "Essential": true,
+            "HealthCheck": {
+              "Command": [
+                "CMD-SHELL",
+                "curl -fs http://localhost:8083/actuator/health || exit 1",
+              ],
+              "Interval": 30,
+              "Retries": 3,
+              "StartPeriod": 60,
+              "Timeout": 5,
+            },
+            "Image": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Select": [
+                      4,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "RegistrationRepo4F684F89",
+                              "Arn",
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".dkr.ecr.",
+                  {
+                    "Fn::Select": [
+                      3,
+                      {
+                        "Fn::Split": [
+                          ":",
+                          {
+                            "Fn::GetAtt": [
+                              "RegistrationRepo4F684F89",
+                              "Arn",
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/",
+                  {
+                    "Ref": "RegistrationRepo4F684F89",
+                  },
+                  ":test",
+                ],
+              ],
+            },
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "RegistrationLogs15800631",
+                },
+                "awslogs-region": "ap-southeast-2",
+                "awslogs-stream-prefix": "registration-service",
+              },
+            },
+            "Name": "registration-service",
+            "PortMappings": [
+              {
+                "ContainerPort": 8083,
+                "Protocol": "tcp",
+              },
+            ],
+          },
+        ],
+        "Cpu": "512",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "RegistrationTaskDefExecutionRole4708C826",
+            "Arn",
+          ],
+        },
+        "Family": "registration-service",
+        "Memory": "1024",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "X86_64",
+          "OperatingSystemFamily": "LINUX",
+        },
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "RegistrationTaskRole9BF0F390",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "RegistrationTaskDefExecutionRole4708C826": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "RegistrationTaskDefExecutionRoleDefaultPolicy4EE8306E": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "RegistrationRepo4F684F89",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "RegistrationLogs15800631",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "RegistrationTaskDefExecutionRoleDefaultPolicy4EE8306E",
+        "Roles": [
+          {
+            "Ref": "RegistrationTaskDefExecutionRole4708C826",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "RegistrationTaskRole9BF0F390": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "registration-service task role (least privilege)",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "RegistrationTaskRoleDefaultPolicy2D14CD31": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "RegistrationTableEE324320",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+            {
+              "Action": "events:PutEvents",
+              "Condition": {
+                "StringEquals": {
+                  "events:source": "licsys.registration",
+                },
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "BusEA82B648",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "RegistrationTaskRoleDefaultPolicy2D14CD31",
+        "Roles": [
+          {
+            "Ref": "RegistrationTaskRole9BF0F390",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ScheduleDlqBC80447A": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "licsys-progression-schedule-dlq",
+        "SqsManagedSseEnabled": true,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "ScheduleDlqPolicy7114C78D": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "ScheduleDlqBC80447A",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "ScheduleDlqBC80447A",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "SchedulerRole59E73443": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "StringEquals": {
+                  "aws:SourceAccount": {
+                    "Ref": "AWS::AccountId",
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "scheduler.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Description": "EventBridge Scheduler: invoke progression trigger only",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SchedulerRoleDefaultPolicy66F774B8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "ProgressionTrigger70A7ECB7",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "ProgressionTrigger70A7ECB7",
+                          "Arn",
+                        ],
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            {
+              "Action": [
+                "sqs:SendMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:GetQueueUrl",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "ScheduleDlqBC80447A",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SchedulerRoleDefaultPolicy66F774B8",
+        "Roles": [
+          {
+            "Ref": "SchedulerRole59E73443",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "UserPool6BA7E5F2": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AccountRecoverySetting": {
+          "RecoveryMechanisms": [
+            {
+              "Name": "verified_email",
+              "Priority": 1,
+            },
+          ],
+        },
+        "AdminCreateUserConfig": {
+          "AllowAdminCreateUserOnly": true,
+        },
+        "AutoVerifiedAttributes": [
+          "email",
+        ],
+        "EmailVerificationMessage": "The verification code to your new account is {####}",
+        "EmailVerificationSubject": "Verify your new account",
+        "EnabledMfas": [
+          "SOFTWARE_TOKEN_MFA",
+        ],
+        "MfaConfiguration": "ON",
+        "Policies": {
+          "PasswordPolicy": {
+            "MinimumLength": 12,
+            "RequireLowercase": true,
+            "RequireNumbers": true,
+            "RequireSymbols": true,
+            "RequireUppercase": true,
+          },
+        },
+        "SmsVerificationMessage": "The verification code to your new account is {####}",
+        "UserPoolName": "licsys-staff",
+        "UsernameAttributes": [
+          "email",
+        ],
+        "VerificationMessageTemplate": {
+          "DefaultEmailOption": "CONFIRM_WITH_CODE",
+          "EmailMessage": "The verification code to your new account is {####}",
+          "EmailSubject": "Verify your new account",
+          "SmsMessage": "The verification code to your new account is {####}",
+        },
+      },
+      "Type": "AWS::Cognito::UserPool",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "UserPoolUiClient88FBD82C": {
+      "Properties": {
+        "AllowedOAuthFlows": [
+          "code",
+        ],
+        "AllowedOAuthFlowsUserPoolClient": true,
+        "AllowedOAuthScopes": [
+          "openid",
+          "email",
+        ],
+        "CallbackURLs": [
+          "https://example.com",
+        ],
+        "ClientName": "licsys-next-ui",
+        "ExplicitAuthFlows": [
+          "ALLOW_USER_SRP_AUTH",
+          "ALLOW_REFRESH_TOKEN_AUTH",
+        ],
+        "GenerateSecret": false,
+        "SupportedIdentityProviders": [
+          "COGNITO",
+        ],
+        "UserPoolId": {
+          "Ref": "UserPool6BA7E5F2",
+        },
+      },
+      "Type": "AWS::Cognito::UserPoolClient",
+    },
+    "Vpc8378EB38": {
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "VpcDynamoDbAFC3533B": {
+      "Properties": {
+        "RouteTableIds": [
+          {
+            "Ref": "VpcappSubnet1RouteTable072E8E09",
+          },
+          {
+            "Ref": "VpcappSubnet2RouteTableB76BFC59",
+          },
+          {
+            "Ref": "VpcpublicSubnet1RouteTable15C15F8E",
+          },
+          {
+            "Ref": "VpcpublicSubnet2RouteTableC5A6DF77",
+          },
+        ],
+        "ServiceName": {
+          "Fn::Join": [
+            "",
+            [
+              "com.amazonaws.",
+              {
+                "Ref": "AWS::Region",
+              },
+              ".dynamodb",
+            ],
+          ],
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc",
+          },
+        ],
+        "VpcEndpointType": "Gateway",
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::VPCEndpoint",
+    },
+    "VpcIGWD7BA715C": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "VpcLink42ED6FF0": {
+      "Properties": {
+        "Name": "licsys-vpc-link",
+        "SecurityGroupIds": [
+          {
+            "Fn::GetAtt": [
+              "VpcLinkSg21D76F2D",
+              "GroupId",
+            ],
+          },
+        ],
+        "SubnetIds": [
+          {
+            "Ref": "VpcappSubnet1SubnetAE489B2F",
+          },
+          {
+            "Ref": "VpcappSubnet2Subnet2449FB56",
+          },
+        ],
+      },
+      "Type": "AWS::ApiGatewayV2::VpcLink",
+    },
+    "VpcLinkSg21D76F2D": {
+      "Properties": {
+        "GroupDescription": "API Gateway VPC link",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "VpcVPCGWBF912B6E": {
+      "Properties": {
+        "InternetGatewayId": {
+          "Ref": "VpcIGWD7BA715C",
+        },
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+    "VpcappSubnet1DefaultRoute64294A8F": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "VpcpublicSubnet1NATGatewayA036E8A6",
+        },
+        "RouteTableId": {
+          "Ref": "VpcappSubnet1RouteTable072E8E09",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "VpcappSubnet1RouteTable072E8E09": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/appSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "VpcappSubnet1RouteTableAssociation168BF781": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "VpcappSubnet1RouteTable072E8E09",
+        },
+        "SubnetId": {
+          "Ref": "VpcappSubnet1SubnetAE489B2F",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "VpcappSubnet1SubnetAE489B2F": {
+      "Properties": {
+        "AvailabilityZone": "ap-southeast-2a",
+        "CidrBlock": "10.0.4.0/22",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "app",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/appSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "VpcappSubnet2DefaultRouteEBCCC1EA": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Ref": "VpcpublicSubnet2NATGateway4A29FD4F",
+        },
+        "RouteTableId": {
+          "Ref": "VpcappSubnet2RouteTableB76BFC59",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "VpcappSubnet2RouteTableAssociation81E96A75": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "VpcappSubnet2RouteTableB76BFC59",
+        },
+        "SubnetId": {
+          "Ref": "VpcappSubnet2Subnet2449FB56",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "VpcappSubnet2RouteTableB76BFC59": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/appSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "VpcappSubnet2Subnet2449FB56": {
+      "Properties": {
+        "AvailabilityZone": "ap-southeast-2b",
+        "CidrBlock": "10.0.8.0/22",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "app",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/appSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "VpcpublicSubnet1DefaultRouteB88F9E93": {
+      "DependsOn": [
+        "VpcVPCGWBF912B6E",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "VpcIGWD7BA715C",
+        },
+        "RouteTableId": {
+          "Ref": "VpcpublicSubnet1RouteTable15C15F8E",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "VpcpublicSubnet1EIP411541E6": {
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/publicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "VpcpublicSubnet1NATGatewayA036E8A6": {
+      "DependsOn": [
+        "VpcpublicSubnet1DefaultRouteB88F9E93",
+        "VpcpublicSubnet1RouteTableAssociation4E83B6E4",
+      ],
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "VpcpublicSubnet1EIP411541E6",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "VpcpublicSubnet1Subnet2BB74ED7",
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/publicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "VpcpublicSubnet1RouteTable15C15F8E": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/publicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "VpcpublicSubnet1RouteTableAssociation4E83B6E4": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "VpcpublicSubnet1RouteTable15C15F8E",
+        },
+        "SubnetId": {
+          "Ref": "VpcpublicSubnet1Subnet2BB74ED7",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "VpcpublicSubnet1Subnet2BB74ED7": {
+      "Properties": {
+        "AvailabilityZone": "ap-southeast-2a",
+        "CidrBlock": "10.0.0.0/24",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/publicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "VpcpublicSubnet2DefaultRoute732F0BEB": {
+      "DependsOn": [
+        "VpcVPCGWBF912B6E",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "VpcIGWD7BA715C",
+        },
+        "RouteTableId": {
+          "Ref": "VpcpublicSubnet2RouteTableC5A6DF77",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "VpcpublicSubnet2EIP811E07A7": {
+      "Properties": {
+        "Domain": "vpc",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/publicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "VpcpublicSubnet2NATGateway4A29FD4F": {
+      "DependsOn": [
+        "VpcpublicSubnet2DefaultRoute732F0BEB",
+        "VpcpublicSubnet2RouteTableAssociationCCE257FF",
+      ],
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "VpcpublicSubnet2EIP811E07A7",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "VpcpublicSubnet2SubnetE34B022A",
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/publicSubnet2",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "VpcpublicSubnet2RouteTableAssociationCCE257FF": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "VpcpublicSubnet2RouteTableC5A6DF77",
+        },
+        "SubnetId": {
+          "Ref": "VpcpublicSubnet2SubnetE34B022A",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "VpcpublicSubnet2RouteTableC5A6DF77": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/publicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "VpcpublicSubnet2SubnetE34B022A": {
+      "Properties": {
+        "AvailabilityZone": "ap-southeast-2b",
+        "CidrBlock": "10.0.1.0/24",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "Name",
+            "Value": "LicsysNext/Vpc/publicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "activityinbox150A4EE0": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 345600,
+        "QueueName": "activity-inbox",
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {
+            "Fn::GetAtt": [
+              "activityinboxdlq79E63AC3",
+              "Arn",
+            ],
+          },
+          "maxReceiveCount": 5,
+        },
+        "SqsManagedSseEnabled": true,
+        "VisibilityTimeout": 60,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "activityinboxPolicy9427E702": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "activityinbox150A4EE0",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "sqs:SendMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:GetQueueUrl",
+              ],
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::GetAtt": [
+                      "toactivityinbox956018AE",
+                      "Arn",
+                    ],
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "activityinbox150A4EE0",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "activityinbox150A4EE0",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "activityinboxdlq79E63AC3": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "activity-inbox-dlq",
+        "SqsManagedSseEnabled": true,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "activityinboxdlqPolicyF17DB9BC": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "activityinboxdlq79E63AC3",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "activityinboxdlq79E63AC3",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "demeritinboxA4936D57": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 345600,
+        "QueueName": "demerit-inbox",
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {
+            "Fn::GetAtt": [
+              "demeritinboxdlqCD7CDEBD",
+              "Arn",
+            ],
+          },
+          "maxReceiveCount": 5,
+        },
+        "SqsManagedSseEnabled": true,
+        "VisibilityTimeout": 60,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "demeritinboxPolicy65906294": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "demeritinboxA4936D57",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "sqs:SendMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:GetQueueUrl",
+              ],
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::GetAtt": [
+                      "todemeritinbox79852059",
+                      "Arn",
+                    ],
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "demeritinboxA4936D57",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "demeritinboxA4936D57",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "demeritinboxdlqCD7CDEBD": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "demerit-inbox-dlq",
+        "SqsManagedSseEnabled": true,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "demeritinboxdlqPolicyBFE092C7": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "demeritinboxdlqCD7CDEBD",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "demeritinboxdlqCD7CDEBD",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "licenceinboxDCCE0223": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 345600,
+        "QueueName": "licence-inbox",
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {
+            "Fn::GetAtt": [
+              "licenceinboxdlq948D5FA5",
+              "Arn",
+            ],
+          },
+          "maxReceiveCount": 5,
+        },
+        "SqsManagedSseEnabled": true,
+        "VisibilityTimeout": 60,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "licenceinboxPolicyC6478090": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "licenceinboxDCCE0223",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "sqs:SendMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:GetQueueUrl",
+              ],
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::GetAtt": [
+                      "tolicenceinbox2814C690",
+                      "Arn",
+                    ],
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "licenceinboxDCCE0223",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "licenceinboxDCCE0223",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "licenceinboxdlq948D5FA5": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "licence-inbox-dlq",
+        "SqsManagedSseEnabled": true,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "licenceinboxdlqPolicy4688C23B": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "licenceinboxdlq948D5FA5",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "licenceinboxdlq948D5FA5",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "notificationinbox20AF2040": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 345600,
+        "QueueName": "notification-inbox",
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {
+            "Fn::GetAtt": [
+              "notificationinboxdlq9913724F",
+              "Arn",
+            ],
+          },
+          "maxReceiveCount": 5,
+        },
+        "SqsManagedSseEnabled": true,
+        "VisibilityTimeout": 60,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "notificationinboxPolicy1B9DF42F": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "notificationinbox20AF2040",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "sqs:SendMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:GetQueueUrl",
+              ],
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::GetAtt": [
+                      "tonotificationinbox09043022",
+                      "Arn",
+                    ],
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "notificationinbox20AF2040",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "notificationinbox20AF2040",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "notificationinboxdlq9913724F": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": "notification-inbox-dlq",
+        "SqsManagedSseEnabled": true,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "notificationinboxdlqPolicyB0DEBBE0": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sqs:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*",
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "notificationinboxdlq9913724F",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Queues": [
+          {
+            "Ref": "notificationinboxdlq9913724F",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::QueuePolicy",
+    },
+    "toactivityinbox956018AE": {
+      "Properties": {
+        "Description": "every domain event, for the activity feed",
+        "EventBusName": {
+          "Ref": "BusEA82B648",
+        },
+        "EventPattern": {
+          "source": [
+            {
+              "prefix": "licsys.",
+            },
+          ],
+        },
+        "Name": "to-activity-inbox",
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "activityinbox150A4EE0",
+                "Arn",
+              ],
+            },
+            "DeadLetterConfig": {
+              "Arn": {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "Arn",
+                ],
+              },
+            },
+            "Id": "Target0",
+            "RetryPolicy": {
+              "MaximumEventAgeInSeconds": 86400,
+              "MaximumRetryAttempts": 10,
+            },
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "todemeritinbox79852059": {
+      "Properties": {
+        "Description": "demerit-service driver and class projection",
+        "EventBusName": {
+          "Ref": "BusEA82B648",
+        },
+        "EventPattern": {
+          "detail-type": [
+            "DriverRegistered",
+            "LicenceProgressed",
+          ],
+        },
+        "Name": "to-demerit-inbox",
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "demeritinboxA4936D57",
+                "Arn",
+              ],
+            },
+            "DeadLetterConfig": {
+              "Arn": {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "Arn",
+                ],
+              },
+            },
+            "Id": "Target0",
+            "RetryPolicy": {
+              "MaximumEventAgeInSeconds": 86400,
+              "MaximumRetryAttempts": 10,
+            },
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "tolicenceinbox2814C690": {
+      "Properties": {
+        "Description": "licence-service projection of demerit points",
+        "EventBusName": {
+          "Ref": "BusEA82B648",
+        },
+        "EventPattern": {
+          "detail-type": [
+            "DemeritPointsChanged",
+          ],
+        },
+        "Name": "to-licence-inbox",
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "licenceinboxDCCE0223",
+                "Arn",
+              ],
+            },
+            "DeadLetterConfig": {
+              "Arn": {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "Arn",
+                ],
+              },
+            },
+            "Id": "Target0",
+            "RetryPolicy": {
+              "MaximumEventAgeInSeconds": 86400,
+              "MaximumRetryAttempts": 10,
+            },
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "tonotificationinbox09043022": {
+      "Properties": {
+        "Description": "notices to issue",
+        "EventBusName": {
+          "Ref": "BusEA82B648",
+        },
+        "EventPattern": {
+          "detail-type": [
+            "SuspensionThresholdReached",
+            "LicenceProgressed",
+          ],
+        },
+        "Name": "to-notification-inbox",
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "notificationinbox20AF2040",
+                "Arn",
+              ],
+            },
+            "DeadLetterConfig": {
+              "Arn": {
+                "Fn::GetAtt": [
+                  "BusDeliveryDlq9197407C",
+                  "Arn",
+                ],
+              },
+            },
+            "Id": "Target0",
+            "RetryPolicy": {
+              "MaximumEventAgeInSeconds": 86400,
+              "MaximumRetryAttempts": 10,
+            },
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

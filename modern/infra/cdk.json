@@ -1,0 +1,9 @@
+{
+  "app": "npx ts-node --prefer-ts-exts bin/licsys.ts",
+  "watch": { "include": ["**"], "exclude": ["README.md", "cdk*.json", "**/*.d.ts", "**/*.js", "tsconfig.json", "package*.json", "node_modules", "test"] },
+  "context": {
+    "imageTag": "latest",
+    "@aws-cdk/aws-iam:minimizePolicies": true,
+    "@aws-cdk/core:target-partitions": ["aws"]
+  }
+}
