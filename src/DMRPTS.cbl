@@ -161,7 +161,9 @@
                    COMPUTE WS-GAP-DAYS =
                        FUNCTION INTEGER-OF-DATE(OFF-DATE)
                      - FUNCTION INTEGER-OF-DATE(WS-PR-DATE(WS-PX))
+      *    BR-05 - PRIOR OFFENCE MUST BE OF THE SAME CLASS
                    IF WS-GAP-DAYS <= 365
+                      AND WS-PR-CLASS(WS-PX) = OFF-CLASS
                        MOVE 'YES' TO WS-DOUBLE-FLAG
                    END-IF
                END-PERFORM

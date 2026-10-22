@@ -57,9 +57,9 @@ class EndToEnd(unittest.TestCase):
             shutil.rmtree(out.parent)
         self.assertEqual(rc, 0)
         self.assertEqual(set(report), {"generatedAt", "summary", "drivers", "renewals"})
-        self.assertEqual(report["summary"], {"drivers": 13, "matched": 8, "expectedDifferences": 5, "unexpected": 0, "renewals": 10, "renewalMatched": 10})
+        self.assertEqual(report["summary"], {"drivers": 13, "matched": 10, "expectedDifferences": 3, "unexpected": 0, "renewals": 10, "renewalMatched": 10})
         expected = {r["driverId"]: r["rule"] for r in report["drivers"] if r["status"] == "EXPECTED_DIFFERENCE"}
-        self.assertEqual(expected, {"D0000004": "BR-03", "D0000005": "BR-03", "D0000012": "BR-03", "D0000009": "BR-05", "D0000013": "BR-05"})
+        self.assertEqual(expected, {"D0000004": "BR-03", "D0000005": "BR-03", "D0000012": "BR-03"})
         row = report["drivers"][0]
         self.assertEqual(set(row), {"driverId", "name", "legacy", "modern", "status", "rule", "reason"})
         self.assertEqual(set(row["legacy"]), {"licenceClass", "points", "suspensionNotice"})
@@ -74,7 +74,7 @@ class EndToEnd(unittest.TestCase):
         finally:
             shutil.rmtree(out.parent)
         self.assertEqual(rc, 0)
-        self.assertEqual(summary["expectedDifferences"], 5)
+        self.assertEqual(summary["expectedDifferences"], 3)
 
 
 if __name__ == "__main__":
