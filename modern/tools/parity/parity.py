@@ -141,8 +141,8 @@ def _raw_offences(data_dir: pathlib.Path) -> List[Dict[str, str]]:
 def model_points(start: int, offences: List[Dict[str, Any]], legacy_bug: bool) -> Tuple[int, List[str]]:
     """Points after posting tonight's offences.
 
-    legacy_bug=True mirrors DMRPTS 2200-APPLY-POINTS: doubles an eligible offence if ANY prior offence (any class)
-    is within 365 days. Otherwise BR-05: only a prior offence of the SAME class doubles.
+    legacy_bug=True mirrors DMRPTS 2200-APPLY-POINTS before the BR-05 fix: doubles an eligible offence if ANY prior
+    offence (any class) is within 365 days. Otherwise BR-05: only a prior offence of the SAME class doubles.
     Returns (points, explanations of offences the two rules treat differently)."""
     pts, notes = start, []
     prior: List[Dict[str, Any]] = []
@@ -196,7 +196,8 @@ def models(case_dir: pathlib.Path, run_date: dt.date) -> Dict[str, Dict[str, Any
     for drv in drivers:
         did = drv["driverId"]
         p_pts, _ = model_points(drv["demeritPoints"], [o for o in policy_offs if o["driverId"] == did], legacy_bug=False)
-        l_pts, notes = model_points(drv["demeritPoints"], legacy_offs.get(did, []), legacy_bug=True)
+        # DMRPTS applies the BR-05 same-class rule, so only the LICUPG (BR-03) bug remains on the legacy side.
+        l_pts, notes = model_points(drv["demeritPoints"], legacy_offs.get(did, []), legacy_bug=False)
         p_cls, p_ten = model_class(drv, p_pts, run_date, legacy_bug=False)
         l_cls, l_ten = model_class(drv, l_pts, run_date, legacy_bug=True)
         out[did] = {

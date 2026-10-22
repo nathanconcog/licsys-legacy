@@ -2,8 +2,8 @@
   "generatedAt": "2026-10-21T02:14:09Z",
   "summary": {
     "drivers": 13,
-    "matched": 8,
-    "expectedDifferences": 5,
+    "matched": 10,
+    "expectedDifferences": 3,
     "unexpected": 0,
     "renewals": 10,
     "renewalMatched": 10
@@ -150,17 +150,17 @@
       "name": "Isla Morgan",
       "legacy": {
         "licenceClass": "OP",
-        "points": 14,
-        "suspensionNotice": true
+        "points": 10,
+        "suspensionNotice": false
       },
       "modern": {
         "licenceClass": "OP",
         "points": 10,
         "suspensionNotice": false
       },
-      "status": "EXPECTED_DIFFERENCE",
+      "status": "MATCH",
       "rule": "BR-05",
-      "reason": "The MP offence on 2026-09-05 followed an SP offence, not an MP one. BR-05 only doubles a repeat of the same class, so it costs 4 points and Isla ends on 10, below the limit of 12. Legacy DMRPTS doubled it to 8 points (14 in total) and wrongly issued a suspension notice."
+      "reason": "The MP offence on 2026-09-05 followed an SP offence, not an MP one. BR-05 only doubles a repeat of the same class, so both systems charge 4 points and Isla ends on 10, below the limit of 12. No suspension notice."
     },
     {
       "driverId": "D0000010",
@@ -218,7 +218,7 @@
       "name": "Maya Rossi",
       "legacy": {
         "licenceClass": "OP",
-        "points": 8,
+        "points": 5,
         "suspensionNotice": false
       },
       "modern": {
@@ -226,9 +226,9 @@
         "points": 5,
         "suspensionNotice": false
       },
-      "status": "EXPECTED_DIFFERENCE",
+      "status": "MATCH",
       "rule": "BR-05",
-      "reason": "The SB offence on 2026-07-10 followed an MP offence, a different class, so it costs 3 points and Maya ends on 5. Legacy DMRPTS doubled it to 6 points (8 in total)."
+      "reason": "The SB offence on 2026-07-10 followed an MP offence, a different class. Both systems charge 3 points and Maya ends on 5."
     }
   ],
   "renewals": [
