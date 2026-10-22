@@ -1,0 +1,7 @@
+DRIVER    DATE      CODE  CL  BASE  APPLIED  DBL  TOTAL
+D0000008  20260918  SP11  SP     3        3  NO       5
+D0000009  20260905  MP01  MP     4        8  YES     14
+D0000010  20260815  SP12  SP     4        8  YES     11
+D0000011  20260601  SB01  SB     3        3  NO       3
+D0000012  20260702  PK01  GN     2        2  NO       3
+D0000013  20260710  SB01  SB     3        6  YES      8
