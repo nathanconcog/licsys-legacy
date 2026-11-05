@@ -5,8 +5,6 @@
 The new system implements the **policy**, not the COBOL bugs. The parity harness expects exactly these differences from the legacy batch:
 
 - D0000004, D0000005 and D0000012 stay P2 (BR-03 counts time from the P2 date).
-- D0000009 ends with 10 points and no notice (BR-05 requires the same offence class).
-- D0000013 ends with 5 points.
 
 ## Layout (all under `modern/`)
 | Path | What | Port |

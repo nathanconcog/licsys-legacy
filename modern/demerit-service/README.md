@@ -122,8 +122,7 @@ failed publish can't be lost. Here it is logged and the request fails with 500.
   - 15 invalid-input cases.
 - **`LegacyFixtureTest`.** Replays `tests/cases/02-dmrpts-demerits` and `01-shipped-sample` against the COBOL
   goldens (`POSTINGS.rpt`, `DRVMAST.posted` and `NOTICES.rpt`), both with drivers registered first and with
-  offences first. The only differences allowed are the BR-05 same-class corrections:
-  - case 02: M0000003 and M0000004;
-  - case 01: D0000009, which now has 10 points and no notice, and D0000013, which now has 5 points.
+  offences first. DMRPTS applies the BR-05 same-class rule, so the service must match the goldens exactly
+  (case 01: D0000009 on 10 points with no notice, D0000013 on 5; case 02: M0000003 on 4, M0000004 on 3).
 - **`DemeritControllerTest`.** Covers the REST shapes and status codes, validation 400s, 404, reset, CORS and health.
 - **`DemeritInboxListenerTest`.** Checks the EventBridge-to-SQS envelope parsing and that bad messages are discarded.
